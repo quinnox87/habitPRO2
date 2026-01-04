@@ -12,7 +12,7 @@
         :root {
             --primary: #6366f1;
             --bg: #f8fafc;
-            /* Variables Dinámicas */
+            /* Variables Dinámicas de Tamaño (Valores base) */
             --scale-factor: 1;
             --cell-size: calc(44px * var(--scale-factor));
             --mood-size: calc(40px * var(--scale-factor));
@@ -54,7 +54,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border-radius: 12px;
+            /* Radio reducido para aspecto de "cajita" */
+            border-radius: 6px; 
             border: 1px solid #e2e8f0;
             user-select: none;
             margin: 0 auto;
@@ -81,7 +82,8 @@
             50% { box-shadow: 0 0 18px rgba(250, 204, 21, 0.6); transform: scale(1.03); }
         }
 
-        .routine-tag { font-size: 0.55em; font-weight: 800; margin-top: -2px; text-transform: uppercase; opacity: 0.9; }
+        /* Ajuste de tamaño para el tag de rutina */
+        .routine-tag { font-size: 0.5em; font-weight: 800; margin-top: -4px; text-transform: uppercase; opacity: 0.9; }
 
         @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         .checked { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); color: white; border-color: transparent !important; }
@@ -251,6 +253,7 @@
                     <span id="zoom-value" class="text-xs font-bold bg-white px-2 py-1 rounded text-indigo-600">100%</span>
                 </div>
                 <input type="range" id="ui-zoom" min="0.6" max="1.3" step="0.1" value="1" class="w-full accent-indigo-600 cursor-pointer" oninput="applyZoom(this.value)">
+                <p class="text-[10px] text-indigo-400">Desliza para ajustar el tamaño de las celdas para tu móvil.</p>
             </div>
 
             <!-- API Key Input -->
@@ -279,7 +282,14 @@
                 <div id="habits-list-config" class="space-y-2"></div>
             </div>
             
-            <button onclick="saveSettings()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold shadow-lg hover:bg-indigo-700 transition-all mt-8">Guardar Cambios</button>
+            <div class="border-t border-slate-100 pt-6 flex flex-col gap-3">
+                <button onclick="clearCurrentMonthData()" class="w-full text-red-500 hover:text-red-700 hover:bg-red-50 py-3 rounded-xl font-bold border border-transparent hover:border-red-100 transition-all text-sm">
+                    🗑️ Borrar Datos del Mes Actual
+                </button>
+                <button onclick="saveSettings()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold shadow-lg hover:bg-indigo-700 transition-all">
+                    Guardar Cambios
+                </button>
+            </div>
         </div>
     </div>
 
@@ -328,7 +338,18 @@
         }
 
         const MOODS = [{icon:'😐',label:'Normal',val:5},{icon:'🙂',label:'Bien',val:6},{icon:'😊',label:'Muy bien',val:7},{icon:'🤩',label:'Flow',val:8},{icon:'😕',label:'Bajo',val:4},{icon:'😢',label:'Triste',val:3},{icon:'😭',label:'Muy triste',val:2},{icon:'😫',label:'Estresado',val:1}];
-        const DEFAULT_ROUTINES = [{id:'E1', name:'Empuje 1', desc:'Pecho, Hombro, Tríceps.'},{id:'E2', name:'Empuje 2', desc:'Hombro pesado, Pecho incl.'},{id:'T1', name:'Tiro 1', desc:'Espalda, Bíceps.'},{id:'T2', name:'Tiro 2', desc:'Espalda (Grosor), Bíceps.'},{id:'P', name:'Pierna', desc:'Sentadilla, Prensa.'},{id:'D', name:'Descanso', desc:'Recuperación activa.'}];
+        
+        // Añadido 'Circuito' a las rutinas por defecto
+        const DEFAULT_ROUTINES = [
+            {id:'E1', name:'Empuje 1', desc:'Pecho, Hombro, Tríceps.'},
+            {id:'E2', name:'Empuje 2', desc:'Hombro pesado, Pecho incl.'},
+            {id:'T1', name:'Tiro 1', desc:'Espalda, Bíceps.'},
+            {id:'T2', name:'Tiro 2', desc:'Espalda (Grosor), Bíceps.'},
+            {id:'P', name:'Pierna', desc:'Sentadilla, Prensa.'},
+            {id:'C', name:'Circuito', desc:'Full Body, Alta Intensidad.'},
+            {id:'D', name:'Descanso', desc:'Recuperación activa.'}
+        ];
+        
         const SUGGESTED_HABITS = [{name: 'Beber 2L Agua', desc: 'Hidratación óptima.'},{name: 'Max 2 Cafés', desc: 'Control de cafeína.'},{name: 'Llamar Queridos', desc: 'Refuerzo social.'},{name: 'Tiempo con Gatas', desc: 'Reducción de estrés.'},{name: 'Practicar Piano', desc: 'Estimulación motora.'},{name: 'Lectura 30 min', desc: 'Reserva cognitiva.'},{name: 'Paseo/Senderismo', desc: 'Sierra de Granada.'}];
         const HOLIDAYS = [{m:0, d:1}, {m:0, d:6}, {m:1, d:28}, {m:4, d:1}, {m:7, d:15}, {m:9, d:12}, {m:10, d:1}, {m:11, d:6}, {m:11, d:8}, {m:11, d:25}];
 
@@ -346,7 +367,6 @@
         let displayMonth = todayInit.getMonth();
         let displayYear = todayInit.getFullYear();
         let habitsChart, correlationChart, currentGymDay;
-        // La clave de API inyectada por el entorno
         const envApiKey = ""; 
 
         function getMonthKey() { return `${displayYear}-${displayMonth}`; }
@@ -488,7 +508,7 @@
             if (lowS === 5) showMoodSupportModal();
         }
         function showStreakCelebration(ms) { const m = document.getElementById('streak-modal'); const l = document.getElementById('streak-habits-list'); l.innerHTML = ''; ms.forEach(it => { l.innerHTML += `<div class="bg-slate-50 p-4 rounded-2xl border flex justify-between font-bold mb-2"><span>${it.name}</span><span class="text-indigo-600">${it.streak} DÍAS</span></div>`; }); m.classList.remove('hidden'); playSound('victory'); }
-        function showFinalMonthCelebration() { document.getElementById('streak-modal').classList.remove('hidden'); document.getElementById('streak-icon').innerText = '👑'; document.getElementById('streak-title').innerText = '¡MAESTRÍA!'; playSound('victory'); }
+        function showFinalMonthCelebration() { document.getElementById('streak-modal').classList.remove('hidden'); document.getElementById('streak-icon').innerText = '👑'; document.getElementById('streak-title').innerText = '¡MAESTRÍA TOTAL!'; playSound('victory'); }
         function showMoodSupportModal() { document.getElementById('mood-support-modal').classList.remove('hidden'); playSound('support'); }
         function closeMoodSupportModal() { document.getElementById('mood-support-modal').classList.add('hidden'); }
         function closeStreakModal() { document.getElementById('streak-modal').classList.add('hidden'); }
@@ -551,11 +571,9 @@
                         insightsBox.innerHTML = `<h3 class="font-bold text-pink-700 mb-2">Neuro-Insights IA</h3><p class="text-slate-700 text-sm leading-relaxed">${insightText}</p>`;
                     } else { throw new Error('No data'); }
                 } catch (e) {
-                    // Fallback local si falla la API
                     insightsBox.innerHTML = `<h3 class="font-bold text-pink-700 mb-2">Neuro-Insights</h3><p>• Adherencia: <strong>${adh}%</strong>. ${adh > 70 ? 'Consolidación alta.' : 'Fase de inicio.'}</p><p>• Tu estado emocional promedio es <strong>${avgMoodLabel}</strong>.</p>`;
                 }
             } else {
-                // Fallback sin API Key
                 insightsBox.innerHTML = `<h3 class="font-bold text-pink-700 mb-2">Neuro-Insights</h3><p>• Adherencia: <strong>${adh}%</strong>. ${adh > 70 ? 'Consolidación alta.' : 'Fase de inicio.'}</p><p>• Tu estado emocional promedio es <strong>${avgMoodLabel}</strong>.</p><p class="text-xs text-slate-400 mt-2">Configura tu API Key en Ajustes para análisis con IA.</p>`;
             }
         }
@@ -571,16 +589,72 @@
             } 
         }
         function renderSuggestions() { const c = document.getElementById('suggestions-container'); c.innerHTML = ''; SUGGESTED_HABITS.forEach(h => { const chip = document.createElement('div'); chip.className = "suggestion-chip"; chip.innerText = `+ ${h.name}`; chip.onclick = () => { if (state.habits.length < 10) { state.habits.push({ id: Date.now().toString(), name: h.name, desc: h.desc }); renderHabitInputs(); } }; c.appendChild(chip); }); }
-        function renderHabitInputs() { const c = document.getElementById('habits-list-config'); c.innerHTML = ''; state.habits.forEach((h, i) => { c.innerHTML += `<div class="flex gap-2 p-2 bg-slate-50 rounded-xl border mb-2"><input type="text" value="${h.name}" class="flex-1 p-2 border rounded-lg habit-name-input"><input type="text" value="${h.desc}" class="flex-[2] p-2 border rounded-lg habit-desc-input"><button onclick="state.habits.splice(${i}, 1); renderHabitInputs();" class="text-red-400 px-2 text-xl">✕</button></div>`; }); }
-        function addHabitInput() { if (state.habits.length < 10) { state.habits.push({ id: Date.now().toString(), name: '', desc: '' }); renderHabitInputs(); } }
+        
+        function renderHabitInputs() { 
+            const c = document.getElementById('habits-list-config'); 
+            c.innerHTML = ''; 
+            state.habits.forEach((h, i) => { 
+                c.innerHTML += `<div class="flex gap-2 p-2 bg-slate-50 rounded-xl border mb-2">
+                    <input type="text" value="${h.name}" class="flex-1 p-2 border rounded-lg habit-name-input outline-none focus:ring-1 ring-indigo-500" placeholder="Nombre">
+                    <input type="text" value="${h.desc}" class="flex-[2] p-2 border rounded-lg habit-desc-input outline-none focus:ring-1 ring-indigo-500" placeholder="Descripción">
+                    <button onclick="removeHabitInput(${i})" class="text-red-400 px-2 text-xl hover:text-red-600 transition-colors">✕</button>
+                </div>`; 
+            }); 
+        }
+
+        function addHabitInput() { 
+            if (state.habits.length < 10) { 
+                state.habits.push({ id: Date.now().toString(), name: '', desc: '' }); 
+                renderHabitInputs(); 
+            } 
+        }
+        
+        function removeHabitInput(i) { 
+            if (state.habits.length <= 3) {
+                alert("Como neuropsicólogo, te recomiendo mantener una estructura mínima de 3 hábitos para asegurar la estabilidad conductual.");
+                return;
+            }
+            state.habits.splice(i, 1); 
+            renderHabitInputs(); 
+        }
+
         function saveSettings() { 
             state.profile.name = document.getElementById('input-name').value; 
             state.profile.age = parseInt(document.getElementById('input-age').value); 
             state.profile.weight = parseInt(document.getElementById('input-weight').value); 
             state.userApiKey = document.getElementById('input-api-key').value;
-            const ns = document.querySelectorAll('.habit-name-input'), ds = document.querySelectorAll('.habit-desc-input'); 
-            state.habits = Array.from(ns).map((n, i) => ({ id: state.habits[i]?.id || Date.now().toString()+i, name: n.value, desc: ds[i].value })).filter(h => h.name.trim()); 
-            saveState(); toggleSettings(); renderAll(); 
+            
+            const ns = document.querySelectorAll('.habit-name-input');
+            const ds = document.querySelectorAll('.habit-desc-input'); 
+            
+            // Filtrar hábitos con nombre vacío
+            const validHabits = Array.from(ns).map((n, i) => ({ 
+                id: state.habits[i]?.id || Date.now().toString()+i, 
+                name: n.value, 
+                desc: ds[i].value 
+            })).filter(h => h.name.trim() !== "");
+
+            if (validHabits.length < 3) {
+                alert("Por favor, asegúrate de tener al menos 3 hábitos con nombre definido antes de guardar.");
+                return;
+            }
+
+            state.habits = validHabits;
+            saveState(); 
+            toggleSettings(); 
+            renderAll(); 
+        }
+        
+        function clearCurrentMonthData() {
+            if (confirm("¿Estás seguro de que quieres borrar todos los datos de este mes? Esta acción no se puede deshacer.")) {
+                const key = getMonthKey();
+                if (state.monthlyData[key]) {
+                    state.monthlyData[key] = { history: {}, moods: {}, gymLogs: {}, celebratedStreaks: {} };
+                    saveState();
+                    renderAll();
+                    toggleSettings();
+                }
+            }
         }
         
         function openRoutinePicker() { const m = document.getElementById('routine-modal'); const o = document.getElementById('routine-options'); o.innerHTML = ''; state.routines.forEach(r => { const div = document.createElement('div'); div.className = "routine-card"; div.onclick = () => { getCurrentMonthData().gymLogs[currentGymDay] = r.id; m.classList.add('hidden'); completeCheck(state.habits.find(h=>h.name.toLowerCase().includes('gimnasio')).id, currentGymDay); }; div.innerHTML = `<strong>${r.id}</strong><br><small>${r.name}</small>`; o.appendChild(div); }); m.classList.remove('hidden'); }
@@ -595,7 +669,22 @@
         function saveState() { localStorage.setItem('neuroHabitData_final_v21', JSON.stringify(state)); }
         window.onload = () => {
             const saved = localStorage.getItem('neuroHabitData_final_v21');
-            if (saved) { state = Object.assign(state, JSON.parse(saved)); if (state.uiScale) applyZoom(state.uiScale); }
+            if (saved) { 
+                state = Object.assign(state, JSON.parse(saved)); 
+                if (state.uiScale) applyZoom(state.uiScale); 
+                
+                // Actualización automática: Si no existe 'Circuito', lo añadimos
+                if (!state.routines.some(r => r.id === 'C')) {
+                    // Lo insertamos antes del descanso (último elemento 'D')
+                    const descansoIndex = state.routines.findIndex(r => r.id === 'D');
+                    const newRoutine = {id:'C', name:'Circuito', desc:'Full Body, Alta Intensidad.'};
+                    if (descansoIndex !== -1) {
+                        state.routines.splice(descansoIndex, 0, newRoutine);
+                    } else {
+                        state.routines.push(newRoutine);
+                    }
+                }
+            }
             renderAll();
         };
     </script>
