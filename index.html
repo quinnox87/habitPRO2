@@ -1,1076 +1,589 @@
-<html lang="es"><head><script>(function(firebaseConfig, initialAuthToken, appId) {
-        window.__firebase_config = firebaseConfig;
-        window.__initial_auth_token = initialAuthToken;
-        window.__app_id = appId;
-            })("\n{\n  \"apiKey\": \"AIzaSyCqyCcs2R2e7AegGjvFAwG98wlamtbHvZY\",\n  \"authDomain\": \"bard-frontend.firebaseapp.com\",\n  \"projectId\": \"bard-frontend\",\n  \"storageBucket\": \"bard-frontend.firebasestorage.app\",\n  \"messagingSenderId\": \"175205271074\",\n  \"appId\": \"1:175205271074:web:2b7bd4d34d33bf38e6ec7b\"\n}\n","eyJhbGciOiJSUzI1NiIsImtpZCI6ImVkMTFlZDM5MmY5YzMwZjkyMGE1OGIzYmQ1NGUyZTI3MjIxZTkwMjQiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJmaXJlYmFzZS1hZG1pbnNkay1mYnN2Y0BiYXJkLWZyb250ZW5kLmlhbS5nc2VydmljZWFjY291bnQuY29tIiwiYXVkIjoiaHR0cHM6Ly9pZGVudGl0eXRvb2xraXQuZ29vZ2xlYXBpcy5jb20vZ29vZ2xlLmlkZW50aXR5LmlkZW50aXR5dG9vbGtpdC52MS5JZGVudGl0eVRvb2xraXQiLCJ1aWQiOiIxMDIxMDg2NDc4Mzg0OTA1NjAxOSIsImlzcyI6ImZpcmViYXNlLWFkbWluc2RrLWZic3ZjQGJhcmQtZnJvbnRlbmQuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJjbGFpbXMiOnsiYXBwSWQiOiJjXzEyMmY1ZThjMDliZTYzZGFfaW5kZXguaHRtbC0yNzkifSwiZXhwIjoxNzY3NTY1ODE0LCJpYXQiOjE3Njc1NjIyMTQsImFsZyI6IlJTMjU2In0.XFgO1vLNLseFNpE1D68qY0kZdPMUHX0rnhV8iKw3MCsoUYZVIl1xuqh_1OMBzyN3axczFOARg4GwADbVxhmKcyX5_M8O8oHcZfzwLULYZye2SSSBS7QOnGjGoTN0D9uRPa4VZGyfXJKj0XtKOrVO6TANFepCbdZ1uW2JEELbiaU-hJi2uH21_kyasoUUp537AS-GSKILg1Y_ZLIwyVoSRtMEGdYioH3cWEX4aXTZ57UzSzNwceTDY6wwfVTtykfa4tIMUp0sb0XD1UBUUc9H9MU5aQ3teEugDvHxjFL9j1EUSsVEJeqbg5irtpF4jPHloO4tpm6UfBNfYXLbCUVF3w","c_122f5e8c09be63da_index.html-279")</script><script>'use strict';var h=typeof Object.defineProperties=="function"?Object.defineProperty:function(a,b,d){if(a==Array.prototype||a==Object.prototype)return a;a[b]=d.value;return a};function l(a){a=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var b=0;b<a.length;++b){var d=a[b];if(d&&d.Math==Math)return d}throw Error("Cannot find global object");}var n=l(this);
-function p(a,b){if(b)a:{var d=n;a=a.split(".");for(var c=0;c<a.length-1;c++){var e=a[c];if(!(e in d))break a;d=d[e]}a=a[a.length-1];c=d[a];b=b(c);b!=c&&b!=null&&h(d,a,{configurable:!0,writable:!0,value:b})}}function r(a){function b(c){return a.next(c)}function d(c){return a.throw(c)}return new Promise(function(c,e){function f(g){g.done?c(g.value):Promise.resolve(g.value).then(b,d).then(f,e)}f(a.next())})}function t(a){return r(a())}
-p("Object.values",function(a){return a?a:function(b){var d=[],c;for(c in b)Object.prototype.hasOwnProperty.call(b,c)&&d.push(b[c]);return d}});p("Array.prototype.includes",function(a){return a?a:function(b,d){var c=this;c instanceof String&&(c=String(c));var e=c.length;d=d||0;for(d<0&&(d=Math.max(d+e,0));d<e;d++){var f=c[d];if(f===b||Object.is(f,b))return!0}return!1}});/*
-
- MIT License
-
- Copyright (c) 2017-2023 W.Y.
-
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
-
-*/
-function u(a,b){const d=a.style;b.backgroundColor&&(d.backgroundColor=b.backgroundColor);b.width&&(d.width=`${b.width}px`);b.height&&(d.height=`${b.height}px`);const c=b.style;c!=null&&Object.keys(c).forEach(e=>{d[e]=c[e]})};var v=(()=>{let a=0;return()=>{a+=1;return`u${`0000${(Math.random()*1679616<<0).toString(36)}`.slice(-4)}${a}`}})();function w(a){const b=[];for(let d=0,c=a.length;d<c;d++)b.push(a[d]);return b}let x=null;function y(a={}){return x?x:a.l?x=a.l:x=w(window.getComputedStyle(document.documentElement))}function z(a,b){return(a=(a.ownerDocument.defaultView||window).getComputedStyle(a).getPropertyValue(b))?parseFloat(a.replace("px","")):0}
-function A(a,b={}){var d;if(!(d=b.width)){d=z(a,"border-left-width");var c=z(a,"border-right-width");d=a.clientWidth+d+c}(b=b.height)||(b=z(a,"border-top-width"),c=z(a,"border-bottom-width"),b=a.clientHeight+b+c);return{width:d,height:b}}function B(a){return new Promise((b,d)=>{const c=new Image;c.onload=()=>{c.decode().then(()=>{requestAnimationFrame(()=>b(c))})};c.onerror=d;c.crossOrigin="anonymous";c.decoding="async";c.src=a})}
-function C(a){return t(function*(){return Promise.resolve().then(()=>(new XMLSerializer).serializeToString(a)).then(encodeURIComponent).then(b=>`data:image/svg+xml;charset=utf-8,${b}`)})}
-function D(a,b,d){return t(function*(){const c=document.createElementNS("http://www.w3.org/2000/svg","svg"),e=document.createElementNS("http://www.w3.org/2000/svg","foreignObject");c.setAttribute("width",`${b}`);c.setAttribute("height",`${d}`);c.setAttribute("viewBox",`0 0 ${b} ${d}`);e.setAttribute("width","100%");e.setAttribute("height","100%");e.setAttribute("x","0");e.setAttribute("y","0");e.setAttribute("externalResourcesRequired","true");c.appendChild(e);e.appendChild(a);return C(c)})}
-var E=(a,b)=>{if(a instanceof b)return!0;a=Object.getPrototypeOf(a);return a===null?!1:a.constructor.name===b.name||E(a,b)};function F(a,b){return y(b).map(d=>{const c=a.getPropertyValue(d),e=a.getPropertyPriority(d);return`${d}: ${c}${e?" !important":""};`}).join(" ")}
-function G(a,b,d,c){a=window.getComputedStyle(a,d);var e=a.getPropertyValue("content");if(e!==""&&e!=="none"){var f=v();try{b.className=`${b.className} ${f}`}catch(k){return}e=document.createElement("style");var g=e.appendChild;d=`.${f}:${d}`;a.cssText?(c=a.getPropertyValue("content"),c=`${a.cssText} content: '${c.replace(/'|"/g,"")}';`):c=F(a,c);g.call(e,document.createTextNode(`${d}{${c}}`));b.appendChild(e)}};function H(a){return a.search(/^(data:)/)!==-1}function I(a,b,d){return t(function*(){const c=yield fetch(a,b);if(c.status===404)throw Error(`Resource "${c.url}" not found`);const e=yield c.blob();return new Promise((f,g)=>{const k=new FileReader;k.onerror=g;k.onloadend=()=>{try{f(d({o:c,result:k.result}))}catch(m){g(m)}};k.readAsDataURL(e)})})}const J={};function K(a,b,d){let c=a.replace(/\?.*/,"");d&&(c=a);/ttf|otf|eot|woff2?/i.test(c)&&(c=c.replace(/.*\//,""));return b?`[${b}]${c}`:c}
-function L(a,b,d){return t(function*(){const c=K(a,b,d.C);if(J[c]!=null)return J[c];d.u&&(a+=(/\?/.test(a)?"&":"?")+(new Date).getTime());let e;try{const f=yield I(a,d.i,({o:g,result:k})=>{b||(b=g.headers.get("Content-Type")||"");return k.split(/,/)[1]});e=`data:${b};base64,${f}`}catch(f){e=d.B||""}return J[c]=e})};const M={P:"application/font-woff",R:"application/font-woff",N:"application/font-truetype",v:"application/vnd.ms-fontobject",H:"image/png",F:"image/jpeg",D:"image/jpeg",A:"image/gif",M:"image/tiff",L:"image/svg+xml",O:"image/webp"};function N(a){return(a=/\.([^./]*?)$/g.exec(a))?a[1]:""};function O(a){return t(function*(){const b=a.toDataURL();return b==="data:,"?a.cloneNode(!1):B(b)})}function aa(a,b){return t(function*(){if(a.currentSrc){var d=document.createElement("canvas");const c=d.getContext("2d");d.width=a.clientWidth;d.height=a.clientHeight;c==null||c.drawImage(a,0,0,d.width,d.height);d=d.toDataURL();return B(d)}d=a.poster;d=yield L(d,M[N(d).toLowerCase()]||"",b);return B(d)})}
-function ba(a,b){return t(function*(){try{let d;if(a==null?0:(d=a.contentDocument)==null?0:d.body)return yield P(a.contentDocument.body,b,!0)}catch(d){}return a.cloneNode(!1)})}function ca(a,b){return t(function*(){return E(a,HTMLCanvasElement)?O(a):E(a,HTMLVideoElement)?aa(a,b):E(a,HTMLIFrameElement)?ba(a,b):a.cloneNode(a.tagName!=null&&a.tagName.toUpperCase()==="SVG")})}
-function da(a,b,d){return t(function*(){if(b.tagName!=null&&b.tagName.toUpperCase()==="SVG")return b;let c=[];if(a.tagName!=null&&a.tagName.toUpperCase()==="SLOT"&&a.assignedNodes)c=w(a.assignedNodes());else{let e;if(E(a,HTMLIFrameElement)&&((e=a.contentDocument)==null?0:e.body))c=w(a.contentDocument.body.childNodes);else{let f;c=w(((f=a.shadowRoot)!=null?f:a).childNodes)}}if(c.length===0||E(a,HTMLVideoElement))return b;yield c.reduce((e,f)=>e.then(()=>P(f,d)).then(g=>{g&&b.appendChild(g)}),Promise.resolve());
-return b})}function ea(a,b,d){const c=b.style;if(c){var e=window.getComputedStyle(a);e.cssText?(c.cssText=e.cssText,c.transformOrigin=e.transformOrigin):y(d).forEach(f=>{let g=e.getPropertyValue(f);f==="font-size"&&g.endsWith("px")&&(g=`${Math.floor(parseFloat(g.substring(0,g.length-2)))-.1}px`);E(a,HTMLIFrameElement)&&f==="display"&&g==="inline"&&(g="block");f==="d"&&b.getAttribute("d")&&(g=`path(${b.getAttribute("d")})`);c.setProperty(f,g,e.getPropertyPriority(f))})}}
-function fa(a,b){E(a,HTMLSelectElement)&&(b=Array.from(b.children).find(d=>a.value===d.getAttribute("value")))&&b.setAttribute("selected","")}
-function ha(a,b){return t(function*(){var d=a.querySelectorAll?a.querySelectorAll("use"):[];if(d.length===0)return a;var c={};for(var e=0;e<d.length;e++){var f=d[e].getAttribute("xlink:href");if(f){const g=document.querySelector(f);a.querySelector(f)||!g||c[f]||(c[f]=yield P(g,b,!0))}}d=Object.values(c);if(d.length){c=document.createElementNS("http://www.w3.org/1999/xhtml","svg");c.setAttribute("xmlns","http://www.w3.org/1999/xhtml");c.style.position="absolute";c.style.width="0";c.style.height="0";
-c.style.overflow="hidden";c.style.display="none";e=document.createElementNS("http://www.w3.org/1999/xhtml","defs");c.appendChild(e);for(f=0;f<d.length;f++)e.appendChild(d[f]);a.appendChild(c)}return a})}
-function P(a,b,d){return t(function*(){return d||!b.filter||b.filter(a)?Promise.resolve(a).then(c=>ca(c,b)).then(c=>da(a,c,b)).then(c=>{E(c,Element)&&(ea(a,c,b),G(a,c,":before",b),G(a,c,":after",b),E(a,HTMLTextAreaElement)&&(c.textContent=a.value),E(a,HTMLInputElement)&&c.setAttribute("value",a.value),fa(a,c));return c}).then(c=>ha(c,b)):null})};const Q=/url\((['"]?)([^'"]+?)\1\)/g,ia=/url\([^)]+\)\s*format\((["']?)([^"']+)\1\)/g,ja=/src:\s*(?:url\([^)]+\)\s*format\([^)]+\)[,;]\s*)+/g;function ka(a){const b=[];a.replace(Q,(d,c,e)=>{b.push(e);return d});return b.filter(d=>!H(d))}
-function la(a,b,d,c){return t(function*(){try{const e=d?(new URL(b,d||void 0)).toString():b;let f;f=yield L(e,M[N(b).toLowerCase()]||"",c);return a.replace(new RegExp(`(url\\(['"]?)(${b.replace(/([.*+?^${}()|\[\]\/\\])/g,"\\$1")})(['"]?\\))`,"g"),`$1${f}$3`)}catch(e){}return a})}function ma(a,{I:b}){return b?a.replace(ja,d=>{for(;;){const [c,,e]=ia.exec(d)||[],f=c,g=e;if(!g)return"";if(g===b)return`src: ${f};`}}):a}
-function R(a,b,d){return t(function*(){if(a.search(Q)===-1)return a;const c=ma(a,d);return ka(c).reduce((e,f)=>e.then(g=>la(g,f,b,d)),Promise.resolve(c))})};function S(a,b,d){return t(function*(){var c;const e=(c=b.style)==null?void 0:c.getPropertyValue(a);return e?(c=yield R(e,null,d),b.style.setProperty(a,c,b.style.getPropertyPriority(a)),!0):!1})}function na(a,b){return t(function*(){(yield S("background",a,b))||(yield S("background-image",a,b));(yield S("mask",a,b))||(yield S("-webkit-mask",a,b))||(yield S("mask-image",a,b))||(yield S("-webkit-mask-image",a,b))})}
-function oa(a,b){return t(function*(){const d=E(a,HTMLImageElement);if(d&&!H(a.src)||E(a,SVGImageElement)&&!H(a.href.baseVal)){var c=d?a.src:a.href.baseVal,e=yield L(c,M[N(c).toLowerCase()]||"",b);yield new Promise((f,g)=>{a.onload=f;a.onerror=b.m?(...k)=>{try{f(b.m(...k))}catch(m){g(m)}}:g;a.decode&&(a.decode=f);a.loading==="lazy"&&(a.loading="eager");d?(a.srcset="",a.src=e):a.href.baseVal=e})}})}
-function pa(a,b){return t(function*(){const d=w(a.childNodes).map(c=>T(c,b));yield Promise.all(d).then(()=>a)})}function T(a,b){return t(function*(){E(a,Element)&&(yield na(a,b),yield oa(a,b),yield pa(a,b))})};const U={};function V(a){return t(function*(){var b=U[a];if(b!=null)return b;b=yield(yield fetch(a)).text();b={url:a,cssText:b};return U[a]=b})}function W(a,b){return t(function*(){let d=a.cssText;const c=/url\(["']?([^"')]+)["']?\)/g,e=(d.match(/url\([^)]+\)/g)||[]).map(f=>t(function*(){let g=f.replace(c,"$1");g.startsWith("https://")||(g=(new URL(g,a.url)).href);return I(g,b.i,({result:k})=>{d=d.replace(f,`url(${k})`);return[f,k]})}));return Promise.all(e).then(()=>d)})}
-function X(a){if(a==null)return[];const b=[];a=a.replace(/(\/\*[\s\S]*?\*\/)/gi,"");for(var d=RegExp("((@.*?keyframes [\\s\\S]*?){([\\s\\S]*?}\\s*?)})","gi");;){var c=d.exec(a);if(c===null)break;b.push(c[0])}a=a.replace(d,"");d=/@import[\s\S]*?url\([^)]*\)[\s\S]*?;/gi;for(c=RegExp("((\\s*?(?:\\/\\*[\\s\\S]*?\\*\\/)?\\s*?@media[\\s\\S]*?){([\\s\\S]*?)}\\s*?})|(([\\s\\S]*?){([\\s\\S]*?)})","gi");;){let e=d.exec(a);if(e===null)if(e=c.exec(a),e===null)break;else d.lastIndex=c.lastIndex;else c.lastIndex=
-d.lastIndex;b.push(e[0])}return b}
-function qa(a,b){return t(function*(){const d=[],c=[];a.forEach(e=>{if("cssRules"in e)try{w(e.cssRules||[]).forEach((f,g)=>{if(f.type===CSSRule.IMPORT_RULE){let k=g+1;f=V(f.href).then(m=>W(m,b)).then(m=>X(m).forEach(q=>{try{e.insertRule(q,q.startsWith("@import")?k+=1:e.cssRules.length)}catch(Da){}})).catch(()=>{});c.push(f)}})}catch(f){const g=a.find(k=>k.href==null)||document.styleSheets[0];e.href!=null&&c.push(V(e.href).then(k=>W(k,b)).then(k=>X(k).forEach(m=>{g.insertRule(m,g.cssRules.length)})).catch(()=>
-{}))}});return Promise.all(c).then(()=>{a.forEach(e=>{if("cssRules"in e)try{w(e.cssRules||[]).forEach(f=>{d.push(f)})}catch(f){}});return d})})}function ra(a){return a.filter(b=>b.type===CSSRule.FONT_FACE_RULE).filter(b=>b.style.getPropertyValue("src").search(Q)!==-1)}function sa(a,b){return t(function*(){if(a.ownerDocument==null)throw Error("Provided element is not within a Document");var d=w(a.ownerDocument.styleSheets);d=yield qa(d,b);return ra(d)})}
-function ta(a){function b(c){(c.style.fontFamily||getComputedStyle(c).fontFamily).split(",").forEach(e=>{d.add(e.trim().replace(/["']/g,""))});Array.from(c.children).forEach(e=>{e instanceof HTMLElement&&b(e)})}const d=new Set;b(a);return d}function ua(a,b){return t(function*(){const d=yield sa(a,b),c=ta(a);return(yield Promise.all(d.filter(e=>c.has(e.style.fontFamily.trim().replace(/["']/g,""))).map(e=>R(e.cssText,e.parentStyleSheet?e.parentStyleSheet.href:null,b)))).join("\n")})}
-function va(a,b){return t(function*(){const d=b.j!=null?b.j:b.K?null:yield ua(a,b);if(d){const c=document.createElement("style");c.appendChild(document.createTextNode(d));a.firstChild?a.insertBefore(c,a.firstChild):a.appendChild(c)}})};function wa(a,b={}){return t(function*(){const {width:d,height:c}=A(a,b),e=yield P(a,b,!0);yield va(e,b);yield T(e,b);u(e,b);return yield D(e,d,c)})}
-function xa(a,b={}){return t(function*(){const {width:d,height:c}=A(a,b);var e=yield wa(a,b);e=yield B(e);const f=document.createElement("canvas"),g=f.getContext("2d"),k=b.G||window.devicePixelRatio||1,m=b.h||d,q=b.g||c;f.width=m*k;f.height=q*k;!b.J&&(f.width>16384||f.height>16384)&&(f.width>16384&&f.height>16384?f.width>f.height?(f.height*=16384/f.width,f.width=16384):(f.width*=16384/f.height,f.height=16384):f.width>16384?(f.height*=16384/f.width,f.width=16384):(f.width*=16384/f.height,f.height=
-16384));f.style.width=`${m}`;f.style.height=`${q}`;b.backgroundColor&&(g.fillStyle=b.backgroundColor,g.fillRect(0,0,f.width,f.height));g.drawImage(e,0,0,f.width,f.height);return f})}function ya(a,b={}){return t(function*(){return(yield xa(a,b)).toDataURL()})};const za=["gemini.google.com","corp.google.com","proxy.googlers.com"];function Y(){return document.body.querySelectorAll('[class*="animate"]').length>0}function Z(a){return t(function*(){try{return yield ya(a,{h:a.offsetWidth,g:a.offsetHeight})}catch(d){var b=a.offsetHeight;const c=document.createElement("canvas");c.width=a.offsetWidth;c.height=b;return c.toDataURL("image/png")}})}
-function Aa(){return t(function*(){const a=document.body.offsetWidth,b=document.body.offsetHeight,d=document.body.cloneNode(!0);d.querySelectorAll('[class*="animate"]').forEach(c=>{c.classList.remove(...Array.from(c.classList).filter(e=>e.startsWith("animate")))});d.style.width=`${a}px`;d.style.height=`${b}px`;return d})}
-function Ba(a){return t(function*(){let b=document.body;if(Y()){var d=yield Aa();b=d;document.body.appendChild(d)}d=yield Z(b);Y()&&document.body.removeChild(b);window.parent.postMessage({type:"SEND_SCREENSHOT",image:d,topOffset:document.documentElement.scrollTop},a.origin)})}function Ca(a){return t(function*(){const b={type:"SEND_SCREENSHOT_FOR_DATA_VISUALIZATION",image:yield Z(document.body),topOffset:0};window.parent.postMessage(b,a.origin)})}
-window.addEventListener("message",a=>t(function*(){if(za.some(d=>a.origin.includes(d))){var b=a.data;b&&(b.type==="MAKE_SCREENSHOT"&&(yield Ba(a)),b.type==="MAKE_SCREENSHOT_FOR_DATA_VISUALIZATION"&&(yield Ca(a)))}}));
-</script><script>(function() {
-  // Ensure this script is executed only once
-  if (window.firebaseAuthBridgeScriptLoaded) {
-    return;
-  }
-  window.firebaseAuthBridgeScriptLoaded = true;
-
-  let nextTokenPromiseId = 0;
-
-  // Stores { resolve, reject } for ongoing token requests
-  const pendingTokenPromises = {};
-
-  // Listen for messages from the Host Application
-  window.addEventListener('message', function(event) {
-
-    const messageData = event.data;
-
-  if (messageData && messageData.type === 'RESOLVE_NEW_FIREBASE_TOKEN') {
-      const { success, token, error, promiseId } = messageData ?? {};
-      if (pendingTokenPromises[promiseId]) {
-        if (success) {
-          pendingTokenPromises[promiseId].resolve(token);
-        } else {
-          pendingTokenPromises[promiseId].reject(new Error(error || 'Token refresh failed from host.'));
-        }
-        delete pendingTokenPromises[promiseId];
-      }
-    }
-  });
-
-  // Expose a function for the Generated App to request a new Firebase token
-  window.requestNewFirebaseToken = function() {
-    const currentPromiseId = nextTokenPromiseId++;
-    const promise = new Promise((resolve, reject) => {
-      pendingTokenPromises[currentPromiseId] = { resolve, reject };
-    });
-    if (window.parent && window.parent !== window) {
-      window.parent.postMessage({
-        type: 'REQUEST_NEW_FIREBASE_TOKEN',
-        promiseId: currentPromiseId
-      }, '*');
-    } else {
-      pendingTokenPromises[currentPromiseId].reject(new Error('No parent window to request token from.'));
-      delete pendingTokenPromises[currentPromiseId];
-    }
-    return promise;
-  };
-})();</script><script>
-let realOriginalGetUserMedia = null;
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-  realOriginalGetUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
-}
-
-(function() {
-  if (navigator.mediaDevices && navigator.mediaDevices.__proto__) {
-    try {
-      Object.defineProperty(navigator.mediaDevices.__proto__, 'getUserMedia', {
-        get: function() {
-          return undefined; // Or throw an error
-        },
-        configurable: false
-      });
-    } catch (error) {
-      console.error("Error defining prototype getter:", error);
-    }
-  }
-})();
-
-(function() {
-  const pendingMediaResolvers = {};
-  let nextMediaPromiseId = 0;
-
-  function requestMediaPermissions(constraints) {
-    const mediaPromiseId = nextMediaPromiseId++;
-    const promise = new Promise((resolve, reject) => {
-      pendingMediaResolvers[mediaPromiseId] = (granted) => {
-        delete pendingMediaResolvers[mediaPromiseId];
-        resolve(granted);
-      };
-    });
-
-    window.parent.postMessage({
-      type: 'requestMediaPermission',
-      constraints: constraints,
-      promiseId: mediaPromiseId,
-    }, '*');
-
-    return promise;
-  }
-
-  let originalGetUserMedia = realOriginalGetUserMedia;
-
-  function interceptGetUserMedia() {
-    if (navigator.mediaDevices) {
-      Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
-        value: function(constraints) {
-          return requestMediaPermissions(constraints).then((granted) => {
-            if (granted) {
-              if (originalGetUserMedia) {
-                return originalGetUserMedia(constraints);
-              } else {
-                throw new Error("Original getUserMedia not available.");
-              }
-            } else {
-              throw new DOMException('Permission denied', 'NotAllowedError');
-            }
-          });
-        },
-        writable: false,
-        configurable: false
-      });
-    }
-  }
-
-  interceptGetUserMedia();
-
-  const observer = new MutationObserver(function(mutationsList, observer) {
-    for (const mutation of mutationsList) {
-      if (mutation.type === 'reconfigured' && mutation.name === 'getUserMedia' && mutation.object === navigator.mediaDevices) {
-        interceptGetUserMedia();
-      } else if (mutation.type === 'attributes' && mutation.attributeName === 'getUserMedia' && mutation.target === navigator.mediaDevices) {
-        interceptGetUserMedia();
-      } else if (mutation.type === 'childList' && mutation.addedNodes) {
-        mutation.addedNodes.forEach(node => {
-          if (node === navigator.mediaDevices) {
-            interceptGetUserMedia();
-          }
-        });
-      }
-    }
-  });
-
-  function interceptSpeechRecognition() {
-    if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
-      return;
-    }
-
-    const OriginalSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    const SpeechRecognitionWrapper = function(...args) {
-      const recognizer = new OriginalSpeechRecognition(...args);
-      const originalStart = recognizer.start.bind(recognizer);
-
-      recognizer.start = function() {
-        requestMediaPermissions({ audio: true }).then(granted => {
-          if (granted) {
-            originalStart();
-          } else {
-            const errorEvent = new SpeechRecognitionErrorEvent('error');
-            errorEvent.error = 'not-allowed'; // This is the standard error for permission denial.
-            recognizer.dispatchEvent(errorEvent);
-          }
-        });
-      };
-
-      return recognizer;
-    };
-
-    SpeechRecognitionWrapper.prototype = OriginalSpeechRecognition.prototype;
-    SpeechRecognitionWrapper.prototype.constructor = SpeechRecognitionWrapper;
-
-    if (window.SpeechRecognition) {
-      window.SpeechRecognition = SpeechRecognitionWrapper;
-    }
-    if (window.webkitSpeechRecognition) {
-      window.webkitSpeechRecognition = SpeechRecognitionWrapper;
-    }
-  }
-
-  interceptSpeechRecognition();
-
-  window.addEventListener('message', function(event) {
-    if (event.data) {
-      if (event.data.type === 'resolveMediaPermission') {
-        const { promiseId, granted } = event.data;
-        if (pendingMediaResolvers[promiseId]) {
-          pendingMediaResolvers[promiseId](granted);
-        }
-      }
-    }
-  });
-
-})();</script><script>((function(modelInformation) {
-  const originalFetch = window.fetch;
-  // TODO: b/421908508 - Move these out of the script and match all generative AI model calls.
-  let googleLlmBaseApiUrls = [
-    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':streamGenerateContent',
-    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':generateContent',
-    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predict',
-    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predictLongRunning',
-    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageEditModelName + ':generateContent',
-    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageTransformModelName + ':generateContent',
-    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predict',
-    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predictLongRunning',
-    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.ttsModelName + ':generateContent',
-  ];
-  modelInformation.deprecatedTextModelNames.forEach((modelName) => {
-    googleLlmBaseApiUrls.push(
-      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
-      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
-    );
-  });
-  modelInformation.deprecatedImageModelNames.forEach((modelName) => {
-    googleLlmBaseApiUrls.push(
-      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predict',
-      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predictLongRunning',
-    );
-  });
-
-  const pendingFetchResolvers = {};
-  let nextPromiseId = 0;
-
-  function handleStringInput(input, optionsArgument) {
-    const actualUrl = input;
-    const fetchCallArgs = [actualUrl, optionsArgument];
-    const effectiveOptions = optionsArgument || {};
-    const bodyForApiKeyCheck = effectiveOptions.body;
-    const bodyForPostMessage = effectiveOptions.body;
-    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
-  }
-
-  function handleRequestInput(input, optionsArgument) {
-    const actualUrl = input.url;
-    const fetchCallArgs = [input, optionsArgument];
-    const effectiveOptions = { method: input.method, headers: new Headers(input.headers) };
-    let bodyForApiKeyCheck;
-    let bodyForPostMessage;
-
-    if (optionsArgument) {
-      if (optionsArgument.method) effectiveOptions.method = optionsArgument.method;
-      if (optionsArgument.headers) effectiveOptions.headers = new Headers(optionsArgument.headers);
-      if ('body' in optionsArgument) {
-        bodyForApiKeyCheck = optionsArgument.body;
-        bodyForPostMessage = optionsArgument.body;
-      } else {
-        bodyForApiKeyCheck = undefined;
-        bodyForPostMessage = input.body;
-      }
-    } else {
-      bodyForApiKeyCheck = undefined;
-      bodyForPostMessage = input.body;
-    }
-    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
-  }
-
-  window.fetch = function(input, optionsArgument) {
-    let actualUrl;
-    let fetchCallArgs;
-    let effectiveOptions = {};
-    let bodyForApiKeyCheck;
-    let bodyForPostMessage;
-
-    if (typeof input === 'string') {
-      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleStringInput(input, optionsArgument));
-    } else if (input instanceof Request) {
-      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleRequestInput(input, optionsArgument));
-    } else {
-      return originalFetch.apply(window, [input, optionsArgument]);
-    }
-
-    effectiveOptions.method = effectiveOptions.method || 'GET';
-    if (!effectiveOptions.headers) {
-      effectiveOptions.headers = new Headers();
-    }
-
-
-    if (typeof actualUrl === 'string' && googleLlmBaseApiUrls.some((url) => actualUrl.startsWith(url))) {
-      let apiKeyIsNull = true;
-
-      const regex = new RegExp("models/([^:]+)");
-      const modelNameMatch = actualUrl.match(regex);
-      const modelName = modelNameMatch ? modelNameMatch[1] : 'unspecified';
-
-
-      try {
-        const urlObject = new URL(actualUrl);  // Use URL object for robust parsing
-        const apiKeyParam = urlObject.searchParams.get('key');
-        if (apiKeyParam) {
-          apiKeyIsNull = false;
-        }
-      } catch (e) {
-        // Continue checks even if URL parsing fails
-      }
-
-      if (apiKeyIsNull && effectiveOptions.headers) {
-        const h = new Headers(effectiveOptions.headers);
-        const apiKeyHeaderValue = h.get('X-API-Key') || h.get('x-api-key');
-        if (apiKeyHeaderValue) {
-          apiKeyIsNull = false;
-          return originalFetch.apply(window, fetchCallArgs);
-        }
-      }
-
-      if (apiKeyIsNull && effectiveOptions.method && ['POST', 'PUT', 'PATCH'].includes(effectiveOptions.method.toUpperCase()) && typeof bodyForApiKeyCheck === 'string') {
-        try {
-          const bodyData = JSON.parse(bodyForApiKeyCheck);
-          if (bodyData && bodyData.apiKey) {
-            apiKeyIsNull = false;
-            return originalFetch.apply(window, fetchCallArgs);
-          }
-        } catch (e) {
-          // Ignore JSON parsing errors
-        }
-      }
-
-      if(apiKeyIsNull) {
-        const promiseId = nextPromiseId++;
-        const promise = new Promise((resolve) => {
-          pendingFetchResolvers[promiseId] = (resolvedResponse) => {
-            delete pendingFetchResolvers[promiseId];
-            resolve(resolvedResponse);
-          };
-        });
-
-        let serializedBodyForPostMessage;
-        if (typeof bodyForPostMessage === 'string' || bodyForPostMessage == null) {
-            serializedBodyForPostMessage = bodyForPostMessage;
-        } else if (bodyForPostMessage instanceof ReadableStream) {
-            serializedBodyForPostMessage = null;
-        } else {
-            try {
-                serializedBodyForPostMessage = JSON.stringify(bodyForPostMessage);
-            } catch (e) {
-                serializedBodyForPostMessage = null;
-            }
-        }
-
-        const messageOptions = {
-            method: effectiveOptions.method,
-            headers: Object.fromEntries(new Headers(effectiveOptions.headers).entries()),
-            body: serializedBodyForPostMessage
-        };
-
-        window.parent.postMessage({
-          type: 'requestFetch',
-          url: actualUrl,
-          modelName: modelName,
-          options: messageOptions,
-          promiseId: promiseId,
-        }, '*');
-
-        return promise;
-      }
-      return originalFetch.apply(window, fetchCallArgs);
-    }
-    return originalFetch.apply(window, fetchCallArgs);
-  };
-
-  window.addEventListener('message', function(event) {
-    if (event.data && event.data.type === 'resolveFetch') {
-      const { promiseId, response } = event.data;
-      if (pendingFetchResolvers[promiseId]) {
-        try {
-          const reconstructedResponse = new Response(response.body, {
-            status: response.status,
-            statusText: response.statusText,
-            headers: new Headers(response.headers),
-          });
-          pendingFetchResolvers[promiseId](reconstructedResponse);
-        } catch (error) {
-          pendingFetchResolvers[promiseId](new Response(null, { status: 500, statusText: "Interceptor Response Reconstruction Error" }));
-        }
-      }
-    }
-  });
-
-}))({"textModelName":"gemini-2.5-flash-preview-09-2025","imageModelName":"imagen-4.0-generate-001","imageEditModelName":"gemini-2.5-flash-image-preview","imageTransformModelName":"gemini-3-pro-image-preview-11-2025","videoModelName":"veo-2.0-generate-001","ttsModelName":"gemini-2.5-flash-preview-tts","deprecatedTextModelNames":["gemini-2.0-flash","gemini-2.5-flash-preview-04-17","gemini-2.5-flash-preview-05-20"],"deprecatedImageModelNames":["imagen-3.0-generate-001","imagen-3.0-generate-002"]})</script><script>(function() {
-  const originalConsoleLog = console.log;
-  const originalConsoleError = console.error;
-
-    /**
-   * Normalizes an error event or a promise rejection reason into a structured error object.
-   * @param {*} errorEventOrReason The error object or reason.
-   * @return {object} Structured error data { message, name, stack }.
-   */
-  function getErrorObject(errorEventOrReason) {
-    if (errorEventOrReason instanceof Error) {
-      return {
-        message: errorEventOrReason.message,
-        name: errorEventOrReason.name,
-        stack: errorEventOrReason.stack,
-      };
-    }
-    // Fallback for non-Error objects.
-    try {
-      return {
-        message: JSON.stringify(errorEventOrReason),
-        name: 'UnknownErrorType',
-        stack: null,
-      };
-    } catch (e) {
-      return {
-        message: String(errorEventOrReason),
-        name: 'UnknownErrorTypeNonStringifiable',
-        stack: null,
-      };
-    }
-  }
-
-  /**
-   * Converts an array of arguments (from log/error) into a single string.
-   * Handles Error objects specially to include their message and stack.
-   * @param {Array<*>} args - Arguments passed to console methods.
-   * @return {string} A string representation of the arguments.
-   */
-  function stringifyArgs(args) {
-    return args
-      .map((arg) => {
-        if (arg instanceof Error) {
-          const {message, stack} = arg;
-          return `Error: ${message}${stack ? ('\nStack: ' + stack) : ''}`;
-        }
-        if (typeof arg === 'object' && arg !== null) {
-          try {
-            return JSON.stringify(arg);
-          } catch (error) {
-            return '[Circular Object]';
-          }
-        } else {
-          return String(arg);
-        }
-      })
-      .join(' ');
-  }
-
-  console.log = function(...args) {
-    const logString = stringifyArgs(args);
-    window.parent.postMessage({ type: 'log', message: logString }, '*');
-    originalConsoleLog.apply(console, args);
-  };
-
-  console.error = function(...args) {
-    let errorData;
-    if (args.length > 0 && args[0] instanceof Error) {
-      const err = args[0];
-      // If the first arg is an Error, capture its details.
-      errorData = {
-        type: 'error',
-        source: 'CONSOLE_ERROR',
-        ...getErrorObject(err),
-        rawArgsString: stringifyArgs(args.slice(1)),
-        timestamp: new Date().toISOString(),
-      };
-    } else {
-      // If not an Error object, treat all args as a general error message.
-      errorData = {
-        type: 'error',
-        source: 'CONSOLE_ERROR',
-        message: stringifyArgs(args),
-        name: 'ConsoleLoggedError',
-        stack: null,
-        timestamp: new Date().toISOString(),
-      };
-    }
-    window.parent.postMessage(errorData, '*');
-    originalConsoleError.apply(console, args);
-  };
-
-  // Listen for global unhandled synchronous errors.
-  window.addEventListener('error', function(event) {
-    const errorDetails = event.error ? getErrorObject(event.error) : {
-      message: event.message,
-      name: 'GlobalError',
-      stack: null,
-      filename: event.filename,
-      lineno: event.lineno,
-      colno: event.colno,
-    };
-
-    window.parent.postMessage({
-      type: 'error',
-      source: 'global',
-      ...errorDetails,
-      message: errorDetails.message || event.message,
-      timestamp: new Date().toISOString(),
-    }, '*');
-  });
-
-  // Listen for unhandled promise rejections (asynchronous errors).
-  window.addEventListener('unhandledrejection', function(event) {
-    const errorDetails = getErrorObject(event.reason);
-
-    window.parent.postMessage({
-      type: 'error',
-      source: 'unhandledrejection',
-      ...errorDetails,
-      message: errorDetails.message || 'Unhandled Promise Rejection',
-      timestamp: new Date().toISOString(),
-    }, '*');
-  });
-
-})();</script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeuroHabit Tracker - Planificador de Hábitos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Habitos Atomicos v104.2 - Fix</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+        /* --- TIPOGRAFÍA --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@400;700&display=swap');
 
         :root {
-            --primary: #6366f1;
-            --bg: #f8fafc;
-            /* Niveles Cromáticos */
-            --tier-bronze: linear-gradient(135deg, #a87932 0%, #78350f 100%);
-            --tier-silver: linear-gradient(135deg, #94a3b8 0%, #475569 100%);
-            --tier-gold: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
-            --tier-platinum: linear-gradient(135deg, #fff7ad 0%, #ffd700 50%, #facc15 100%);
+            --paper-bg: #FFFFFF;         
+            --ink-primary: #0F172A;      
+            --ink-secondary: #475569;    
+            --accent-vibrant: #6366F1;   
+            --accent-green: #10B981;     
+            --accent-gold: #F59E0B;      
+            --accent-danger: #EF4444;    
+            --line-soft: #F1F5F9;
+            --weekend-bg: #E2E8F0;      
+            --holiday-bg: #FEE2E2;      
+            --metal-bronze: #D97706;
+            --metal-silver: #64748B;
+            --metal-gold: #F59E0B;
+            --metal-super: #4F46E5;      
+            --shadow-pop: 0 20px 25px -5px rgba(0,0,0,0.15), 0 8px 10px -6px rgba(0,0,0,0.1);
+            --champion-success: rgba(16, 185, 129, 0.12); 
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background: linear-gradient(135deg, #f0f4ff 0%, #fff1f2 100%);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #CBD5E1;
+            background-image: radial-gradient(var(--accent-vibrant) 0.5px, transparent 0.5px);
+            background-size: 40px 40px;
+            color: var(--ink-primary);
             min-height: 100vh;
-            color: #1e293b;
-            padding-bottom: 2rem;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-        }
-
-        .weekend-row { background-color: rgba(99, 102, 241, 0.05) !important; }
-        .holiday-row { background-color: rgba(239, 68, 68, 0.04) !important; }
-
-        .habit-cell {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            width: 44px;
-            height: 44px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            user-select: none;
-            margin: 0 auto;
-            font-size: 1.1rem;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- CONTENEDOR ADAPTATIVO --- */
+        .page-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--paper-bg);
+            box-shadow: var(--shadow-pop);
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
             position: relative;
-            background: white;
+            padding: 1rem;
         }
 
-        .habit-cell:hover { transform: scale(1.1); background-color: #f1f5f9; }
-
-        .checked.tier-bronze { background: var(--tier-bronze); box-shadow: 0 4px 10px rgba(120, 53, 15, 0.2); }
-        .checked.tier-silver { background: var(--tier-silver); box-shadow: 0 4px 10px rgba(71, 85, 105, 0.2); }
-        .checked.tier-gold { background: var(--tier-gold); box-shadow: 0 4px 10px rgba(184, 134, 11, 0.3); border-color: rgba(255,255,255,0.2) !important; }
-        .checked.tier-platinum { 
-            background: var(--tier-platinum); 
-            box-shadow: 0 0 15px rgba(250, 204, 21, 0.4); 
-            animation: pulse-glow 1.8s infinite;
-            border-color: #ffffff !important;
-            color: #854d0e !important;
+        @media (min-width: 768px) {
+            .page-container {
+                margin: 2rem;
+                min-height: 297mm;
+                border-radius: 12px;
+                padding: 14mm 16mm;
+                border: 2px solid var(--ink-primary);
+            }
         }
 
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 8px rgba(250, 204, 21, 0.3); transform: scale(1); }
-            50% { box-shadow: 0 0 18px rgba(250, 204, 21, 0.6); transform: scale(1.03); }
+        h1 { font-weight: 900; font-size: 1.5rem; letter-spacing: -0.04em; color: var(--ink-primary); }
+        .subtitle { font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent-vibrant); }
+
+        /* --- MATRIZ MOBILE FRIENDLY --- */
+        .tracker-container { 
+            display: flex; 
+            flex-direction: column; 
+            flex-grow: 1; 
+            margin-top: 1.5rem; 
+            overflow: hidden; 
+            padding-bottom: 80px; 
+        }
+        
+        .table-wrapper { 
+            flex-grow: 1; 
+            overflow: auto; 
+            border: 1px solid var(--ink-primary); 
+            background: white; 
+            border-radius: 8px; 
+            position: relative;
         }
 
-        .routine-tag { font-size: 0.55rem; font-weight: 800; margin-top: -2px; text-transform: uppercase; opacity: 0.9; }
-
-        @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        .checked { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); color: white; border-color: transparent !important; }
-
-        .mood-cell {
-            cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem; border-radius: 50%; transition: background 0.2s; margin: 0 auto;
+        .tracker-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        .tracker-table th { 
+            font-size: 0.5rem; font-weight: 900; text-align: center; vertical-align: bottom; padding: 8px 2px;
+            height: 50px; border-bottom: 2px solid var(--ink-primary); color: white; background: var(--ink-primary); 
+            position: sticky; top: 0; z-index: 30; cursor: pointer;
+        }
+        
+        .tracker-table td { height: 35px; border-bottom: 1px solid var(--line-soft); border-right: 1px solid var(--line-soft); text-align: center; position: relative; }
+        
+        .day-col { 
+            font-weight: 900; font-size: 0.75rem; width: 35px !important; 
+            background: #F1F5F9; color: var(--ink-primary); 
+            border-right: 2px solid var(--ink-primary) !important;
+            position: sticky; left: 0; z-index: 20;
         }
 
-        .mood-cell:hover { background: #f1f5f9; }
+        .weekend-row td:not(.day-col):not(.trophy-col) { background-color: var(--weekend-bg); }
+        .holiday-row td:not(.day-col):not(.trophy-col) { background-color: var(--holiday-bg); }
+        .holiday-row .day-col { color: var(--accent-danger) !important; background-color: #FEE2E2; }
 
-        .matrix-container { overflow-x: auto; max-height: 65vh; overflow-y: auto; scrollbar-width: thin; border-radius: 1rem; }
-        .sticky-col { position: sticky; left: 0; background: white; z-index: 20; min-width: 70px; text-align: center; font-weight: bold; border-right: 2px solid #f1f5f9; }
-        .sticky-row { position: sticky; top: 0; background: white; z-index: 30; }
+        .mood-col { width: 55px !important; border-right: 2px solid var(--ink-primary) !important; }
+        
+        .mood-selector { cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
+        .mood-emoji { font-size: 1.2rem; line-height: 1; }
+        .mood-label { font-size: 0.4rem; font-weight: 900; text-transform: uppercase; color: var(--ink-secondary); margin-top: 2px; }
 
-        .tooltip { position: relative; }
-        .tooltip:hover::after {
-            content: attr(data-description); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
-            background: #1e293b; color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.7rem; white-space: nowrap; z-index: 50;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        .tracker-cell { cursor: pointer; position: relative; min-width: 45px; }
+        .tracker-cell.completed::after {
+            content: '\2605'; 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; z-index: 10; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .tracker-cell.completed.streak-7::after { font-size: 28px !important; z-index: 15; transform: scale(1.15); filter: drop-shadow(0 0 8px white); }
+
+        .bronze-mark.completed::after { color: var(--metal-bronze); }
+        .silver-mark.completed::after { color: var(--metal-silver); }
+        .gold-mark.completed::after { color: var(--metal-gold); }
+        .super-gold-mark.completed::after { color: var(--metal-super); filter: drop-shadow(0 0 5px var(--accent-vibrant)); }
+
+        tr.row-full-complete td:not(.day-col):not(.trophy-col) { background-color: var(--champion-success) !important; }
+        .trophy-col { width: 45px !important; border-left: 2px solid var(--ink-primary); background: #F8FAFC; }
+        .trophy-display { font-size: 1.2rem; display: flex; align-items: center; justify-content: center; height: 100%; }
+
+        /* --- NAVEGACIÓN MÓVIL --- */
+        .mobile-nav {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex; justify-content: space-around;
+            padding: 0.75rem 0.5rem;
+            border-top: 1px solid var(--line-soft);
+            z-index: 100;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
         }
 
-        @keyframes victory { 0% { transform: scale(0); rotate: -45deg; } 70% { transform: scale(1.2); rotate: 10deg; } 100% { transform: scale(1); rotate: 0deg; } }
-        .reward-animate { animation: victory 0.5s ease-out forwards; }
-
-        .routine-card { cursor: pointer; transition: all 0.2s; border: 2px solid #f1f5f9; border-radius: 1rem; padding: 1rem; text-align: center; }
-        .routine-card:hover { transform: translateY(-2px); border-color: var(--primary); background: #f5f3ff; }
-
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-
-        .stat-card { background: white; padding: 1rem; border-radius: 1.25rem; border: 1px solid #f1f5f9; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .insight-box { background: #fdf2f8; border: 1px solid #fce7f3; padding: 1.5rem; border-radius: 1.5rem; }
-
-        .suggestion-chip {
-            background: #f1f5f9; color: #475569; padding: 0.4rem 0.8rem; border-radius: 9999px;
-            font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-            border: 1px solid #e2e8f0; white-space: nowrap;
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 4px; color: var(--ink-secondary);
+            font-size: 0.6rem; font-weight: 800; text-transform: uppercase;
         }
-        .suggestion-chip:hover { background: #e0e7ff; color: #4f46e5; border-color: #c7d2fe; transform: translateY(-1px); }
+        .nav-item.active { color: var(--accent-vibrant); }
+        .nav-item i { font-size: 1.2rem; }
 
-        .month-nav-btn {
-            background: white; border: 1px solid #e2e8f0; width: 36px; height: 36px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;
+        @media (min-width: 768px) {
+            .mobile-nav { display: none; }
+            .tracker-container { padding-bottom: 0; }
         }
-        .month-nav-btn:hover { background: #f8fafc; border-color: #6366f1; color: #6366f1; transform: scale(1.1); }
+
+        /* MODAL FULLSCREEN EN MÓVIL */
+        @media (max-width: 767px) {
+            .modal-card { width: 100% !important; height: 100% !important; max-width: none !important; border-radius: 0 !important; border: none !important; }
+            .tab-btn { padding: 10px 12px; font-size: 0.6rem; }
+        }
+
+        #toast-notification { 
+            visibility: hidden; min-width: 280px; background-color: var(--ink-primary); color: white; text-align: center; 
+            padding: 16px; position: fixed; z-index: 2000; left: 50%; bottom: 100px; transform: translateX(-50%); 
+            font-size: 0.8rem; border-radius: 10px; opacity: 0; transition: 0.4s; font-weight: 700;
+            border-left: 8px solid var(--accent-gold); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        #toast-notification.show { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0); }
+        #toast-notification.alert-mode { border-left-color: var(--accent-danger); }
+        #toast-notification.success-mode { border-left-color: var(--accent-green); }
+
+        .loading-ia { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 20px; font-weight: 800; color: var(--accent-gold); }
+
+        @keyframes popIn { from { transform: scale(0) rotate(-45deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
+        .no-print { user-select: none; }
     </style>
-<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.inset-0{inset:0px}.z-50{z-index:50}.z-\[100\]{z-index:100}.z-\[200\]{z-index:200}.z-\[250\]{z-index:250}.z-\[60\]{z-index:60}.z-\[70\]{z-index:70}.z-\[80\]{z-index:80}.mx-auto{margin-left:auto;margin-right:auto}.mb-8{margin-bottom:2rem}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mt-8{margin-top:2rem}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.max-h-\[85vh\]{max-height:85vh}.max-h-\[90vh\]{max-height:90vh}.w-full{width:100%}.min-w-\[220px\]{min-width:220px}.min-w-\[280px\]{min-width:280px}.min-w-\[120px\]{min-width:120px}.min-w-\[60px\]{min-width:60px}.max-w-7xl{max-width:80rem}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-6xl{max-width:72rem}.max-w-lg{max-width:32rem}.max-w-md{max-width:28rem}.max-w-sm{max-width:24rem}.max-w-xl{max-width:36rem}.border-collapse{border-collapse:collapse}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-4{gap:1rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-\[2\.5rem\]{border-radius:2.5rem}.rounded-\[2rem\]{border-radius:2rem}.rounded-\[3rem\]{border-radius:3rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b-8{border-bottom-width:8px}.border-b{border-bottom-width:1px}.border-indigo-100{--tw-border-opacity:1;border-color:rgb(224 231 255 / var(--tw-border-opacity, 1))}.border-indigo-500{--tw-border-opacity:1;border-color:rgb(99 102 241 / var(--tw-border-opacity, 1))}.border-pink-500{--tw-border-opacity:1;border-color:rgb(236 72 153 / var(--tw-border-opacity, 1))}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249 / var(--tw-border-opacity, 1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-50{--tw-border-opacity:1;border-color:rgb(248 250 252 / var(--tw-border-opacity, 1))}.bg-indigo-50{--tw-bg-opacity:1;background-color:rgb(238 242 255 / var(--tw-bg-opacity, 1))}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(79 70 229 / var(--tw-bg-opacity, 1))}.bg-pink-500{--tw-bg-opacity:1;background-color:rgb(236 72 153 / var(--tw-bg-opacity, 1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-slate-50\/80{background-color:rgb(248 250 252 / 0.8)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-900\/40{background-color:rgb(15 23 42 / 0.4)}.bg-slate-900\/50{background-color:rgb(15 23 42 / 0.5)}.bg-slate-900\/60{background-color:rgb(15 23 42 / 0.6)}.bg-slate-900\/70{background-color:rgb(15 23 42 / 0.7)}.bg-slate-900\/80{background-color:rgb(15 23 42 / 0.8)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-indigo-600{--tw-gradient-from:#4f46e5 var(--tw-gradient-from-position);--tw-gradient-to:rgb(79 70 229 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-pink-500{--tw-gradient-from:#ec4899 var(--tw-gradient-from-position);--tw-gradient-to:rgb(236 72 153 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-pink-600{--tw-gradient-to:#db2777 var(--tw-gradient-to-position)}.to-rose-500{--tw-gradient-to:#f43f5e var(--tw-gradient-to-position)}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.p-4{padding:1rem}.p-10{padding:2.5rem}.p-2{padding:0.5rem}.p-3{padding:0.75rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.text-left{text-align:left}.text-center{text-align:center}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-7xl{font-size:4.5rem;line-height:1}.text-\[10px\]{font-size:10px}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-\[9px\]{font-size:9px}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-black{font-weight:900}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.capitalize{text-transform:capitalize}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.tracking-widest{letter-spacing:0.1em}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-amber-500{--tw-text-opacity:1;color:rgb(245 158 11 / var(--tw-text-opacity, 1))}.text-emerald-500{--tw-text-opacity:1;color:rgb(16 185 129 / var(--tw-text-opacity, 1))}.text-indigo-600{--tw-text-opacity:1;color:rgb(79 70 229 / var(--tw-text-opacity, 1))}.text-indigo-700{--tw-text-opacity:1;color:rgb(67 56 202 / var(--tw-text-opacity, 1))}.text-pink-500{--tw-text-opacity:1;color:rgb(236 72 153 / var(--tw-text-opacity, 1))}.text-pink-600{--tw-text-opacity:1;color:rgb(219 39 119 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.opacity-60{opacity:0.6}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.backdrop-blur-lg{--tw-backdrop-blur:blur(16px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:bg-indigo-100:hover{--tw-bg-opacity:1;background-color:rgb(224 231 255 / var(--tw-bg-opacity, 1))}.hover\:bg-indigo-700:hover{--tw-bg-opacity:1;background-color:rgb(67 56 202 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-50:hover{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-50\/50:hover{background-color:rgb(248 250 252 / 0.5)}.hover\:text-slate-600:hover{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.hover\:brightness-110:hover{--tw-brightness:brightness(1.1);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:p-6{padding:1.5rem}}@media (min-width: 1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.lg\:p-10{padding:2.5rem}}</style></head>
-<body class="p-4 md:p-6 lg:p-10">
+</head>
+<body>
 
-    <div class="max-w-7xl mx-auto">
-        <!-- Header Principal -->
-        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-            <div>
-                <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-pink-600">
-                    NeuroHabit Tracker
-                </h1>
-                <p id="profile-summary" class="text-slate-500 font-medium">Neuro Usuario • 38 años • 84 kg</p>
+    <!-- BOTONES ESCRITORIO -->
+    <div class="no-print hidden md:flex fixed top-6 left-6 z-50 gap-3">
+        <button onclick="downloadHTML()" class="p-2 bg-white rounded-full shadow-md border border-slate-200" title="Guardar"><i class="fas fa-save text-indigo-600"></i></button>
+        <button onclick="exportCSV()" class="p-2 bg-white rounded-full shadow-md border border-slate-200" title="Exportar CSV"><i class="fas fa-file-csv text-green-600"></i></button>
+    </div>
+
+    <!-- NAVEGACIÓN MÓVIL -->
+    <nav class="mobile-nav no-print">
+        <button onclick="openMealSelector()" class="nav-item active"><i class="fas fa-utensils"></i><span>Chef</span></button>
+        <button onclick="openWorkoutSelector()" class="nav-item"><i class="fas fa-dumbbell"></i><span>Gym</span></button>
+        <button onclick="openSettings('tab-profile')" class="nav-item"><i class="fas fa-cog"></i><span>Ajustes</span></button>
+    </nav>
+
+    <div class="page-container">
+        <header class="flex justify-between items-center border-b-2 border-slate-900 pb-4 mb-2">
+            <div class="flex items-center gap-3">
+                <div id="display-avatar" class="w-10 h-10 md:w-14 md:h-14 rounded-full border-2 border-slate-900 flex items-center justify-center text-xl md:text-3xl bg-white shadow-sm"><i class="fas fa-brain"></i></div>
+                <div>
+                    <h1 id="display-name">Enero 2026</h1>
+                    <p class="subtitle italic">Habitos Atomicos</p>
+                </div>
             </div>
-            <div class="flex flex-wrap justify-center gap-2">
-                <button onclick="exportFullHTML()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-full font-bold shadow-lg transition-all flex items-center gap-2">
-                    <span>💾 Guardar App</span>
-                </button>
-                <button onclick="openAnalysis()" class="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-5 py-2 rounded-full font-bold shadow-lg transition-transform hover:scale-105 flex items-center gap-2">
-                    <span>📊 Análisis</span>
-                </button>
-                <button onclick="toggleRoutineSettings()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full font-semibold text-sm transition-all border border-indigo-100">
-                    💪 Rutinas
-                </button>
-                <button onclick="toggleSettings()" class="bg-white hover:bg-slate-50 text-slate-700 px-6 py-2 rounded-full font-semibold shadow-sm border border-slate-200 transition-all flex items-center gap-2">
-                    <span>⚙️ Ajustes</span>
-                </button>
+            
+            <div class="hidden md:flex gap-3 no-print">
+                <button onclick="openMealSelector()" class="p-2 border-2 border-slate-900 rounded-lg text-xs font-black bg-indigo-50"><i class="fas fa-utensils text-indigo-600"></i> NEURO-CHEF ✨</button>
+                <button onclick="openSettings('tab-profile')" class="p-2 border-2 border-slate-900 rounded-lg"><i class="fas fa-cog"></i></button>
             </div>
         </header>
 
-        <!-- Matriz de Hábitos -->
-        <div class="glass-card p-6 mb-8 overflow-hidden">
-            <div class="flex items-center justify-center mb-8 gap-6">
-                <button onclick="changeMonth(-1)" class="month-nav-btn text-xl shadow-sm">←</button>
-                <h2 id="current-month-name" class="text-3xl font-black capitalize text-slate-800 tracking-tight min-w-[220px] text-center">Enero 2026</h2>
-                <button onclick="changeMonth(1)" class="month-nav-btn text-xl shadow-sm">→</button>
-            </div>
-
-            <div class="matrix-container shadow-inner border border-slate-100">
-                <table class="w-full border-collapse bg-white">
-                    <thead class="sticky-row">
-                        <tr id="matrix-header" class="bg-slate-50/80"><th class="sticky-col p-4 text-slate-400 uppercase text-[10px]">Día</th><th class="p-4 text-slate-400 uppercase text-[10px] text-center">Mood</th><th class="p-4 text-center text-slate-700 font-bold text-sm min-w-[120px] tooltip" onclick="showLegend('1')" data-description="Entrenamiento programado">Gimnasio</th><th class="p-4 text-center text-slate-700 font-bold text-sm min-w-[120px] tooltip" onclick="showLegend('2')" data-description="Práctica diaria">Tocar Piano</th><th class="p-4 text-center text-slate-700 font-bold text-sm min-w-[120px] tooltip" onclick="showLegend('3')" data-description="20 páginas">Lectura</th><th class="p-4 text-center text-slate-700 font-bold text-sm min-w-[120px] tooltip" onclick="showLegend('4')" data-description="Ruta por la Sierra">Sierra/Senderismo</th><th class="p-4 text-slate-400 uppercase text-[10px] text-center">Logro</th></tr>
-                    </thead>
-                    <tbody id="matrix-body"><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  holiday-row"><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>1</span><span class="text-[9px] opacity-60">J</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 1)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 1)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 1)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 1)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 1)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>2</span><span class="text-[9px] opacity-60">V</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 2)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 2)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 2)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 2)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 2)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors weekend-row "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>3</span><span class="text-[9px] opacity-60">S</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 3)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 3)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 3)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 3)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 3)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors weekend-row "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>4</span><span class="text-[9px] opacity-60">D</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 4)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 4)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 4)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 4)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 4)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>5</span><span class="text-[9px] opacity-60">L</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 5)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 5)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 5)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 5)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 5)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  holiday-row"><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>6</span><span class="text-[9px] opacity-60">M</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 6)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 6)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 6)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 6)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 6)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>7</span><span class="text-[9px] opacity-60">X</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 7)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 7)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 7)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 7)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 7)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>8</span><span class="text-[9px] opacity-60">J</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 8)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 8)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 8)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 8)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 8)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>9</span><span class="text-[9px] opacity-60">V</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 9)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 9)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 9)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 9)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 9)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors weekend-row "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>10</span><span class="text-[9px] opacity-60">S</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 10)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 10)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 10)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 10)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 10)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors weekend-row "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>11</span><span class="text-[9px] opacity-60">D</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 11)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 11)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 11)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 11)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 11)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>12</span><span class="text-[9px] opacity-60">L</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 12)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 12)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 12)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 12)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 12)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>13</span><span class="text-[9px] opacity-60">M</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 13)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 13)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 13)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 13)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 13)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>14</span><span class="text-[9px] opacity-60">X</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 14)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 14)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 14)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 14)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 14)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>15</span><span class="text-[9px] opacity-60">J</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 15)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 15)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 15)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 15)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 15)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>16</span><span class="text-[9px] opacity-60">V</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 16)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 16)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 16)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 16)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 16)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors weekend-row "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>17</span><span class="text-[9px] opacity-60">S</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 17)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 17)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 17)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 17)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 17)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors weekend-row "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>18</span><span class="text-[9px] opacity-60">D</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 18)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 18)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 18)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 18)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 18)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>19</span><span class="text-[9px] opacity-60">L</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 19)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 19)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 19)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 19)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 19)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>20</span><span class="text-[9px] opacity-60">M</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 20)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 20)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 20)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 20)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 20)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>21</span><span class="text-[9px] opacity-60">X</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 21)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 21)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 21)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 21)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 21)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>22</span><span class="text-[9px] opacity-60">J</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 22)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 22)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 22)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 22)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 22)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>23</span><span class="text-[9px] opacity-60">V</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 23)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 23)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 23)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 23)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 23)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors weekend-row "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>24</span><span class="text-[9px] opacity-60">S</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 24)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 24)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 24)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 24)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 24)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors weekend-row "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>25</span><span class="text-[9px] opacity-60">D</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 25)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 25)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 25)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 25)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 25)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>26</span><span class="text-[9px] opacity-60">L</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 26)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 26)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 26)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 26)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 26)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>27</span><span class="text-[9px] opacity-60">M</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 27)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 27)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 27)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 27)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 27)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>28</span><span class="text-[9px] opacity-60">X</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 28)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 28)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 28)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 28)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 28)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>29</span><span class="text-[9px] opacity-60">J</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 29)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 29)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 29)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 29)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 29)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors  "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>30</span><span class="text-[9px] opacity-60">V</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 30)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 30)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 30)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 30)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 30)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr><tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors weekend-row "><td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>31</span><span class="text-[9px] opacity-60">S</span></div></td><td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, 31)">●</div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('1', 31)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('2', 31)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('3', 31)"></div></td><td class="p-2"><div class="habit-cell " onclick="toggleDay('4', 31)"></div></td><td class="p-2 text-center text-xl min-w-[60px]"><span class=" block"></span></td></tr></tbody>
+        <div class="tracker-container">
+            <div class="table-wrapper" id="table-scroll-area">
+                <table class="tracker-table" id="tracker-table">
+                    <thead id="tracker-head"></thead>
+                    <tbody id="tracker-body"></tbody>
                 </table>
             </div>
         </div>
+
+        <footer class="mt-4 flex justify-between items-center text-[0.55rem] font-black text-slate-900 uppercase tracking-widest italic opacity-40">
+            <span>Granada • ES</span>
+            <span>Neuro-Chef v104.2</span>
+        </footer>
     </div>
 
-    <!-- MODAL DE CELEBRACIÓN -->
-    <div id="streak-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-md hidden z-[200] flex items-center justify-center p-4">
-        <div class="streak-alert bg-white w-full max-w-md rounded-[2.5rem] p-10 shadow-2xl text-center border-b-8 border-indigo-500" id="streak-modal-box">
-            <div class="text-7xl mb-4" id="streak-icon">🔥</div>
-            <h2 class="text-3xl font-black text-slate-800 mb-2" id="streak-title">¡LOGRO!</h2>
-            <p class="text-slate-500 mb-6 font-medium" id="streak-subtitle">Consolidando nuevas vías neuronales.</p>
-            <div id="streak-habits-list" class="flex flex-col gap-2 mb-8"></div>
-            <button onclick="closeStreakModal()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black shadow-lg hover:brightness-110 transition-all uppercase tracking-widest">
-                ¡Brillante!
-            </button>
-        </div>
-    </div>
-
-    <!-- MODAL DE APOYO -->
-    <div id="mood-support-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-lg hidden z-[250] flex items-center justify-center p-4">
-        <div class="streak-alert bg-white w-full max-w-lg rounded-[2.5rem] p-10 shadow-2xl text-center border-b-8 border-pink-500">
-            <div class="text-7xl mb-4">🫂</div>
-            <h2 class="text-3xl font-black text-pink-600 mb-4 tracking-tight">Un momento de cuidado</h2>
-            <div class="space-y-4 text-slate-600 font-medium leading-relaxed text-left">
-                <p>Llevas 5 días con el ánimo bajo. Recuerda que la resiliencia incluye saber cuándo parar y cuidarse.</p>
-                <p>Hoy no te pedimos perfección. Granada y tus gatas te esperan.</p>
-            </div>
-            <button onclick="closeMoodSupportModal()" class="mt-8 w-full bg-pink-500 text-white py-4 rounded-2xl font-black shadow-lg transition-all uppercase tracking-widest">
-                Entendido
-            </button>
-        </div>
-    </div>
-
-    <!-- MODAL DE ANÁLISIS -->
-    <div id="analysis-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md hidden z-[100] flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-6xl rounded-[3rem] p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-8 px-2">
-                <h2 class="text-3xl font-bold text-slate-800" id="analysis-title">Análisis Conductual</h2>
-                <button onclick="closeAnalysis()" class="text-slate-400 hover:text-slate-600 text-3xl">✕</button>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-                <div class="stat-card"><span class="text-3xl mb-1">🏆</span><span class="text-2xl font-black text-indigo-600" id="stat-perfect-days">0</span><span class="text-[10px] uppercase font-bold text-slate-400">Días Perfectos</span></div>
-                <div class="stat-card"><span class="text-3xl mb-1">🧠</span><span class="text-2xl font-black text-emerald-500" id="stat-global-avg">0%</span><span class="text-[10px] uppercase font-bold text-slate-400">Adherencia</span></div>
-                <div class="stat-card"><span class="text-3xl mb-1">🌈</span><span class="text-2xl font-black text-pink-500" id="stat-avg-mood-label">Normal</span><span class="text-[10px] uppercase font-bold text-slate-400 text-center">Estado Medio</span></div>
-                <div class="stat-card"><span class="text-3xl mb-1">⭐</span><span class="text-2xl font-black text-amber-500" id="stat-total-stars">0</span><span class="text-[10px] uppercase font-bold text-slate-400">Estrellas</span></div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                <div class="bg-slate-50 p-6 rounded-[2rem] border"><canvas id="habitsChart"></canvas></div>
-                <div class="bg-slate-50 p-6 rounded-[2rem] border"><canvas id="moodCorrelationChart"></canvas></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div id="habits-detail-list" class="space-y-2"></div>
-                <div class="insight-box" id="neuro-insights-content"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Ajustes -->
-    <div id="settings-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-3xl rounded-3xl p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
-            <h2 class="text-2xl font-bold mb-6">Configuración</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                <div><label class="block text-xs font-bold text-slate-400 uppercase mb-1">Nombre</label><input type="text" id="input-name" class="w-full p-2 border rounded-xl"></div>
-                <div><label class="block text-xs font-bold text-slate-400 uppercase mb-1">Edad</label><input type="number" id="input-age" class="w-full p-2 border rounded-xl"></div>
-                <div><label class="block text-xs font-bold text-slate-400 uppercase mb-1">Peso (kg)</label><input type="number" id="input-weight" class="w-full p-2 border rounded-xl"></div>
-            </div>
-            <div class="mb-8"><label class="block text-xs font-bold text-slate-400 uppercase mb-3 tracking-widest text-center">💡 Sugerencias</label><div class="flex flex-wrap gap-2 justify-center" id="suggestions-container"></div></div>
-            <div class="mb-8"><h3 class="font-bold mb-4">Hábitos (Máx. 10) <button onclick="addHabitInput()" class="text-xs bg-indigo-600 text-white px-3 py-1 rounded-full">+ Añadir</button></h3><div id="habits-list-config" class="space-y-2"></div></div>
-            <button onclick="saveSettings()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold">Guardar Todo</button>
-        </div>
-    </div>
-
-    <!-- Modals Soporte -->
-    <div id="routine-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md hidden z-[70] flex items-center justify-center p-4"><div class="bg-white w-full max-w-2xl rounded-3xl p-8 shadow-2xl"><h2 class="text-2xl font-bold mb-6 text-center">Selecciona Rutina</h2><div id="routine-options" class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8"></div><button onclick="cancelRoutine()" class="w-full py-3 border rounded-2xl font-bold">Cancelar</button></div></div>
-    <div id="routine-settings-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden z-[80] flex items-center justify-center p-4"><div class="bg-white w-full max-w-xl rounded-3xl p-8 shadow-2xl max-h-[85vh] overflow-y-auto"><h2 class="text-2xl font-bold mb-6">Editar Rutinas</h2><div id="routine-edit-list" class="space-y-4 mb-8"></div><button onclick="saveRoutineSettings()" class="w-full bg-indigo-600 text-white py-3 rounded-2xl font-bold">Guardar</button></div></div>
-    <div id="legend-modal" class="fixed inset-0 bg-slate-900/40 hidden z-[60] flex items-center justify-center p-4"><div class="bg-white w-full max-w-sm rounded-2xl p-6 text-center"><h3 id="legend-title" class="text-xl font-bold mb-2"></h3><p id="legend-desc" class="italic mb-6"></p><button onclick="closeLegend()" class="w-full bg-indigo-600 text-white py-2 rounded-xl font-bold">Cerrar</button></div></div>
-    <div id="mood-picker" class="fixed hidden z-[100] bg-white border shadow-2xl rounded-2xl p-3 grid grid-cols-4 gap-3 min-w-[280px]"></div>
-
-    <script id="main-script">
-        // --- MOTOR DE AUDIO ---
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playSound(type) {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
-            osc.connect(gain); gain.connect(audioCtx.destination);
-            if (type === 'check') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(523, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
-                gain.gain.setValueAtTime(0.2, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.1);
-            } else if (type === 'uncheck') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(220, audioCtx.currentTime + 0.1);
-                gain.gain.setValueAtTime(0.2, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.1);
-            } else if (type === 'mood') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(329, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.15, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.2);
-            } else if (type === 'support') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(261, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.8);
-            } else if (type === 'victory') {
-                [523, 659, 783, 1046].forEach((f, i) => {
-                    const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
-                    o.connect(g); g.connect(audioCtx.destination); o.type = 'triangle';
-                    o.frequency.setValueAtTime(f, audioCtx.currentTime + (i * 0.1));
-                    g.gain.setValueAtTime(0.1, audioCtx.currentTime + (i * 0.1));
-                    g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + (i * 0.1) + 0.5);
-                    o.start(audioCtx.currentTime + (i * 0.1)); o.stop(audioCtx.currentTime + (i * 0.1) + 0.5);
-                });
-            }
-        }
-
-        const MOODS = [{icon:'😐',label:'Normal',val:5},{icon:'🙂',label:'Bien',val:6},{icon:'😊',label:'Muy bien',val:7},{icon:'🤩',label:'Flow',val:8},{icon:'😕',label:'Bajo',val:4},{icon:'😢',label:'Triste',val:3},{icon:'😭',label:'Muy triste',val:2},{icon:'😫',label:'Estresado',val:1}];
-        const DEFAULT_ROUTINES = [{id:'E1', name:'Empuje 1', desc:'Pecho, Hombro, Tríceps.'},{id:'E2', name:'Empuje 2', desc:'Hombro pesado, Pecho incl.'},{id:'T1', name:'Tiro 1', desc:'Espalda, Bíceps.'},{id:'T2', name:'Tiro 2', desc:'Espalda (Grosor), Bíceps.'},{id:'P', name:'Pierna', desc:'Sentadilla, Prensa.'},{id:'D', name:'Descanso', desc:'Recuperación activa.'}];
-        const SUGGESTED_HABITS = [{name: 'Beber 2L Agua', desc: 'Hidratación óptima.'},{name: 'Max 2 Cafés', desc: 'Control de cafeína.'},{name: 'Llamar Queridos', desc: 'Refuerzo social.'},{name: 'Tiempo con Gatas', desc: 'Reducción de estrés.'},{name: 'Practicar Piano', desc: 'Estimulación motora.'},{name: 'Lectura 30 min', desc: 'Reserva cognitiva.'},{name: 'Paseo/Senderismo', desc: 'Sierra de Granada.'}];
-        const HOLIDAYS = [{m:0, d:1}, {m:0, d:6}, {m:1, d:28}, {m:4, d:1}, {m:7, d:15}, {m:9, d:12}, {m:10, d:1}, {m:11, d:6}, {m:11, d:8}, {m:11, d:25}];
-
-        // --- ESTADO ---
-        let state = {
-            profile: { name: 'Neuro Usuario', age: 38, weight: 84 },
-            habits: [{id:'1', name:'Gimnasio', desc:'Entrenamiento programado'},{id:'2', name:'Tocar Piano', desc:'Práctica diaria'},{id:'3', name:'Lectura', desc:'20 páginas'},{id:'4', name:'Sierra/Senderismo', desc:'Ruta por la Sierra'}],
-            routines: JSON.parse(JSON.stringify(DEFAULT_ROUTINES)),
-            monthlyData: {} 
-        };
-
-        const todayInit = new Date();
-        let displayMonth = todayInit.getMonth();
-        let displayYear = todayInit.getFullYear();
-        let habitsChart, correlationChart, currentGymDay;
-
-        function getMonthKey() { return `${displayYear}-${displayMonth}`; }
-        function getCurrentMonthData() {
-            const key = getMonthKey();
-            if (!state.monthlyData[key]) state.monthlyData[key] = { history: {}, moods: {}, gymLogs: {}, celebratedStreaks: {} };
-            if (!state.monthlyData[key].celebratedStreaks) state.monthlyData[key].celebratedStreaks = {};
-            return state.monthlyData[key];
-        }
-
-        function getTierInfo(count) {
-            if (count <= 7) return 'tier-bronze';
-            if (count <= 14) return 'tier-silver';
-            if (count <= 21) return 'tier-gold';
-            return 'tier-platinum';
-        }
-
-        // --- EXPORTAR APP COMO HTML ---
-        function exportFullHTML() {
-            // Obtenemos el código fuente actual
-            let currentHTML = document.documentElement.outerHTML;
+    <!-- MODAL -->
+    <div id="main-modal" class="no-print fixed inset-0 hidden z-[200] flex items-center justify-center p-0 md:p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div class="modal-card p-6 w-full transform transition-all scale-100 flex flex-col">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-300 hover:text-slate-600 transition z-50"><i class="fas fa-times fa-lg"></i></button>
             
-            // Creamos un script que sobrescriba el estado inicial con el estado actual
-            const dataToInject = `
-            <script>
-                // Datos inyectados automáticamente al guardar
-                const injectedState = ${JSON.stringify(state)};
-                window.onload = () => {
-                    state = injectedState;
-                    renderAll();
-                    console.log("NeuroHabit: Aplicación cargada con datos embebidos.");
-                };
-            <\/script>`;
+            <div class="modal-tabs overflow-x-auto whitespace-nowrap" id="modal-tabs-header">
+                <div id="btn-tab-profile" class="tab-btn active" onclick="switchTab('tab-profile')">PERFIL</div>
+                <div id="btn-tab-habits" class="tab-btn" onclick="switchTab('tab-habits')">HÁBITOS</div>
+                <div id="btn-tab-meals" class="tab-btn" onclick="switchTab('tab-meals')">CHEF IA</div>
+                <div id="btn-tab-workouts" class="tab-btn" onclick="switchTab('tab-workouts')">GIMNASIO</div>
+                <div id="btn-tab-system" class="tab-btn" onclick="switchTab('tab-system')">SISTEMA</div>
+            </div>
+            
+            <div id="ia-result" class="hidden mb-6 p-4 bg-slate-900 text-white italic text-sm rounded-lg border-l-4 border-amber-500 shadow-xl overflow-y-auto">
+                 <button onclick="document.getElementById('ia-result').classList.add('hidden')" class="absolute top-2 right-2 text-white opacity-50 hover:opacity-100 text-xs">✕</button>
+                 <div id="ia-content"></div>
+            </div>
 
-            // Insertamos el script antes del cierre de body
-            currentHTML = currentHTML.replace('
-            <script>
-                // Datos inyectados automáticamente al guardar
-                const injectedState = {"profile":{"name":"Neuro Usuario","age":38,"weight":84},"habits":[{"id":"1","name":"Gimnasio","desc":"Entrenamiento programado"},{"id":"2","name":"Tocar Piano","desc":"Práctica diaria"},{"id":"3","name":"Lectura","desc":"20 páginas"},{"id":"4","name":"Sierra/Senderismo","desc":"Ruta por la Sierra"}],"routines":[{"id":"E1","name":"Empuje 1","desc":"Pecho, Hombro, Tríceps."},{"id":"E2","name":"Empuje 2","desc":"Hombro pesado, Pecho incl."},{"id":"T1","name":"Tiro 1","desc":"Espalda, Bíceps."},{"id":"T2","name":"Tiro 2","desc":"Espalda (Grosor), Bíceps."},{"id":"P","name":"Pierna","desc":"Sentadilla, Prensa."},{"id":"D","name":"Descanso","desc":"Recuperación activa."}],"monthlyData":{"2026-0":{"history":{},"moods":{},"gymLogs":{},"celebratedStreaks":{}}}};
-                window.onload = () => {
-                    state = injectedState;
-                    renderAll();
-                    console.log("NeuroHabit: Aplicación cargada con datos embebidos.");
-                };
-            </script></body>', dataToInject + '</body>');
+            <!-- SELECTOR GIMNASIO -->
+            <div id="gym-day-selector" class="tab-content hidden text-center flex-grow">
+                <h4 class="font-black text-indigo-600 uppercase text-xs mb-4 italic">Registro Táctico</h4>
+                <div class="grid grid-cols-1 gap-2 mb-4" id="gym-routine-grid"></div>
+                <button onclick="setGymDay(6)" class="w-full py-4 bg-slate-100 text-slate-800 text-xs font-black uppercase border-2 border-indigo-600 rounded mb-3">🌊 Descanso (D)</button>
+                <button onclick="clearGymCheck()" class="w-full py-2 text-red-500 font-bold text-xs">Borrar Registro</button>
+            </div>
+            
+            <div id="tab-profile" class="tab-content flex-grow">
+                <div class="flex flex-col gap-4">
+                    <input type="text" id="p-name" placeholder="Tu Nombre" class="border-b-2 border-slate-900 w-full p-2 font-black outline-none text-lg bg-transparent">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="number" id="p-age" placeholder="Edad" class="border-b border-slate-200 p-2 text-sm">
+                        <input type="number" id="p-weight" placeholder="kg" class="border-b border-slate-200 p-2 text-sm">
+                    </div>
+                </div>
+            </div>
 
-            const blob = new Blob([currentHTML], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `NeuroHabit_Tracker_${displayYear}_${displayMonth+1}.html`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            <div id="tab-habits" class="tab-content hidden flex-grow">
+                <div id="habits-list-ui" class="max-h-40 overflow-y-auto border border-slate-100 rounded mb-4 text-xs"></div>
+                <div class="bg-indigo-50 p-3 rounded-lg">
+                    <input type="text" id="h-name" placeholder="Nuevo Hábito" class="border p-2 text-xs w-full rounded mb-2 uppercase font-bold">
+                    <input type="text" id="h-tip" placeholder="Leyenda / Explicación" class="border p-2 text-[10px] w-full rounded mb-2 outline-none">
+                    <button onclick="addHabitAction()" class="w-full py-2 bg-indigo-600 text-white rounded font-bold text-xs">Añadir</button>
+                </div>
+            </div>
+
+            <div id="tab-meals" class="tab-content hidden text-center flex-grow">
+                <p class="text-xs font-black text-slate-400 uppercase mb-4 tracking-widest">Sugerencias Nutricionales</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="suggestMeal('Desayuno')" class="btn-option"><strong>☕ Desayuno Fit ✨</strong><span>Bajo en grasa</span></button>
+                    <button onclick="suggestMeal('Almuerzo')" class="btn-option"><strong>🥗 Almuerzo Fit ✨</strong><span>Alto en proteína</span></button>
+                    <button onclick="suggestMeal('Cena')" class="btn-option"><strong>🍲 Cena Fit ✨</strong><span>Rica en verduras</span></button>
+                    <button onclick="suggestMeal('Snack')" class="btn-option"><strong>🥜 Snack Fit ✨</strong><span>Ligero y sano</span></button>
+                    <button onclick="suggestMeal('Placer Culpable')" class="btn-option bg-rose-50 border-rose-200 col-span-2">
+                        <div class="flex justify-between items-center w-full">
+                            <strong>🍕 PLACER CULPABLE ✨</strong>
+                            <span class="text-[10px] text-rose-600 font-black">BURGERS, PIZZA, FRITOS...</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div id="tab-workouts" class="tab-content hidden flex-grow">
+                <p class="text-[10px] font-black text-slate-400 uppercase mb-4 text-center tracking-widest italic">Split Semanal</p>
+                <div id="gym-editor-list" class="max-h-80 overflow-y-auto"></div>
+            </div>
+
+            <div id="tab-system" class="tab-content hidden text-center flex-grow">
+                <input type="password" id="api-key-input" class="border p-3 rounded w-full mb-6 font-mono text-xs" placeholder="API Key Gemini">
+                <button onclick="confirmReset()" class="w-full py-3 bg-red-600 text-white rounded font-bold text-xs">BORRAR TODOS LOS DATOS</button>
+            </div>
+
+            <div class="mt-auto flex justify-between items-center border-t pt-4" id="modal-footer">
+                <button onclick="closeModal()" class="text-xs font-black text-slate-400">VOLVER</button>
+                <button id="btn-save-all" onclick="saveAllSettings()" class="py-3 px-8 bg-slate-900 text-white rounded-lg font-black text-xs">GUARDAR TODO</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-notification"></div>
+
+    <script>
+        const apiKeyDefault = ""; 
+        const daysInMonth = 31;
+        const moodConfig = [{icon:'😐',label:'Normal'}, {icon:'🙂',label:'Bien'}, {icon:'😁',label:'Genial'}, {icon:'🤩',label:'Flow'}, {icon:'🙁',label:'Bajo'}, {icon:'😢',label:'Triste'}, {icon:'😭',label:'Muy Triste'}, {icon:'😫',label:'Estresado'}];
+        const routineLabels = { 1: "T1", 2: "E1", 3: "P", 4: "T2", 5: "E2", 6: "D" };
+        const nationalHolidays = [1, 6];
+
+        let habitsConfig = [];
+        let profileData = {name:'', age:'', height:'183', weight: '84', avatar:'fa-brain'};
+        let myRoutines = [];
+        let trackerBody, trackerHead;
+        let activeGymDayOfMonth = null;
+
+        const playSfx = (f,t,d,v) => { try{ const ac=new(window.AudioContext||window.webkitAudioContext)(); const o=ac.createOscillator(); const g=ac.createGain(); o.type=t; o.frequency.setValueAtTime(f,ac.currentTime); g.gain.setValueAtTime(v,ac.currentTime); g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+d); o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime+d+0.1); }catch(e){} };
+        const playPop=()=>playSfx(400,'sine',0.1,0.1); 
+        const playVictory=()=>{ [523,659,783,1046,1318].forEach((f,i)=>setTimeout(()=>playSfx(f,'sine',0.8,0.1),i*100)); };
+
+        // --- GEMINI API INTEGRATION ---
+        async function callGemini(prompt, systemPrompt) {
+            const userKey = localStorage.getItem('gemini_api_key') || apiKeyDefault;
+            const apiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${userKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+            const maxRetries = 5;
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(apiEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if (response.ok) { const result = await response.json(); return result.candidates?.[0]?.content?.parts?.[0]?.text; }
+                } catch (error) {
+                    const delay = Math.pow(2, i) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+            throw new Error("API Offline");
         }
 
-        // --- RENDER ---
-        function changeMonth(dir) { displayMonth += dir; if(displayMonth > 11) { displayMonth = 0; displayYear++; } if(displayMonth < 0) { displayMonth = 11; displayYear--; } renderAll(); }
+        async function displayIA(text) {
+            const iaBox = document.getElementById('ia-result');
+            const iaContent = document.getElementById('ia-content');
+            iaBox.classList.remove('hidden');
+            iaContent.innerHTML = text.replace(/\n/g, '<br>');
+        }
 
-        function renderAll() {
-            document.getElementById('profile-summary').innerText = `${state.profile.name} • ${state.profile.age} años • ${state.profile.weight} kg`;
-            const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-            document.getElementById('current-month-name').innerText = `${monthNames[displayMonth]} ${displayYear}`;
-            const data = getCurrentMonthData();
-            const dInMonth = new Date(displayYear, displayMonth + 1, 0).getDate();
-            const header = document.getElementById('matrix-header');
-            header.innerHTML = `<th class="sticky-col p-4 text-slate-400 uppercase text-[10px]">Día</th><th class="p-4 text-slate-400 uppercase text-[10px] text-center">Mood</th>`;
-            state.habits.forEach(h => { header.innerHTML += `<th class="p-4 text-center text-slate-700 font-bold text-sm min-w-[120px] tooltip" onclick="showLegend('${h.id}')" data-description="${h.desc}">${h.name}</th>`; });
-            header.innerHTML += `<th class="p-4 text-slate-400 uppercase text-[10px] text-center">Logro</th>`;
-            const body = document.getElementById('matrix-body'); body.innerHTML = '';
-            const weekDays = ['D', 'L', 'M', 'X', 'J', 'V', 'S'];
-            for (let d = 1; d <= dInMonth; d++) {
-                const dateObj = new Date(displayYear, displayMonth, d);
-                const dayW = dateObj.getDay();
-                const isWE = (dayW === 0 || dayW === 6);
-                const isH = HOLIDAYS.some(h => h.m === displayMonth && h.d === d);
-                const row = document.createElement('tr');
-                row.className = `border-b border-slate-50 hover:bg-slate-50/50 transition-colors ${isWE ? 'weekend-row' : ''} ${isH ? 'holiday-row' : ''}`;
-                const curM = data.moods[d];
-                row.innerHTML = `<td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>${d}</span><span class="text-[9px] opacity-60">${weekDays[dayW]}</span></div></td>`;
-                row.innerHTML += `<td class="p-2 text-center"><div class="mood-cell" onclick="openMoodPicker(event, ${d})">${curM || '●'}</div></td>`;
-                let checkedT = 0;
-                state.habits.forEach(h => {
-                    const isC = (data.history[h.id] || []).includes(d);
-                    if (isC) checkedT++;
-                    const cnt = (data.history[h.id] || []).length;
-                    const isG = h.name.toLowerCase().includes('gimnasio');
-                    let content = isC ? '⭐' : '';
-                    if (isG && isC && data.gymLogs[d]) content = `⭐ <span class="routine-tag">${data.gymLogs[d]}</span>`;
-                    row.innerHTML += `<td class="p-2"><div class="habit-cell ${isC ? 'checked ' + getTierInfo(cnt) : ''}" onclick="toggleDay('${h.id}', ${d})">${content}</div></td>`;
+        async function suggestMeal(type) {
+            displayIA('<div class="loading-ia"><i class="fas fa-utensils fa-spin"></i> Consultando al Neuro-Chef para Granada...</div>');
+            const todayDay = new Date().getDate();
+            const moodEmoji = document.getElementById(`mood-row-${todayDay}`)?.innerText || "😐";
+            
+            let constraints = (type === "Placer Culpable") 
+                ? "Regla: Es un capricho. Puede incluir Pizzas, Hamburguesas, Fritos." 
+                : "Regla Estricta: Alimentación Fit. Baja en grasa, rica en proteínas, con abundantes verduras frescas.";
+
+            const prompt = `Usuario: ${profileData.name}, 38 años, 84kg, 183cm. Ubicación: Granada. Tipo: ${type}. Mood actual: ${moodEmoji}. Ingredientes: Mercadona. ${constraints} Sé breve.`;
+
+            try { 
+                const res = await callGemini(prompt, "Eres un Chef especializado en neuro-gastronomía."); 
+                displayIA(res); 
+            } catch (err) { 
+                displayIA("⚠️ Error al conectar con el Chef IA."); 
+            }
+        }
+
+        // --- CORE LOGIC ---
+        function init() {
+            trackerBody = document.getElementById('tracker-body');
+            trackerHead = document.getElementById('tracker-head');
+            loadConfig(); renderHabitsUI(); renderRightPage(); updateProfileDisplay(); renderGymRoutinesUI();
+            setTimeout(checkMoodAlert, 1500);
+            setTimeout(checkInactivityAlerts, 2000);
+        }
+
+        function renderRightPage() {
+            if (!trackerHead || !trackerBody) return;
+            trackerHead.innerHTML = `<tr><th class="day-col">#</th><th class="mood-col">MOOD</th>${habitsConfig.map(h => `<th><i class="fas ${h.icon}"></i><br>${h.name}</th>`).join('')}<th class="trophy-col">🏆</th></tr>`;
+            trackerBody.innerHTML = '';
+            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
+            const habitChecksSoFar = {}; habitsConfig.forEach(h => habitChecksSoFar[h.id] = 0);
+            let totalPerfectDays = 0;
+
+            for(let i=1; i<=daysInMonth; i++) {
+                const tr = document.createElement('tr'); tr.id = `row-${i}`;
+                const date = new Date(2026, 0, i);
+                if(date.getDay()===0||date.getDay()===6) tr.classList.add('weekend-row');
+                if(nationalHolidays.includes(i)) tr.classList.add('holiday-row');
+                
+                let html = `<td class="day-col">${i}</td>`;
+                const currentMood = saved.moods ? saved.moods[i] : null;
+                let moodHtml = currentMood ? `<span class="mood-emoji">${currentMood}</span><span class="mood-label">${moodConfig.find(m=>m.icon===currentMood)?.label || ''}</span>` : `·`;
+                html += `<td class="mood-col" id="mood-row-${i}" onclick="cycleMood(${i})"><div class="mood-selector">${moodHtml}</div></td>`;
+
+                let rowIsComplete = true; let habitsMarkedCount = 0;
+                habitsConfig.forEach(h => {
+                    const checkValue = saved.habits && saved.habits[`${i}-${h.id}`];
+                    const isDone = !!checkValue;
+                    if (isDone) { habitChecksSoFar[h.id]++; habitsMarkedCount++; } else { rowIsComplete = false; }
+                    let streak = 0; if (isDone) { for (let d = i; d > 0; d--) { if (saved.habits && saved.habits[`${d}-${h.id}`]) streak++; else break; } }
+                    const isStreakMilestone = isDone && streak > 0 && streak % 7 === 0;
+                    const metalClass = getMetalClass(habitChecksSoFar[h.id]);
+                    const isGym = h.id.toLowerCase().includes('gym') || h.icon.includes('dumbbell');
+                    const routineValue = (isGym && isDone && typeof checkValue === 'number') ? checkValue : null;
+
+                    html += `<td class="tracker-cell ${metalClass} ${isDone?'completed':''} ${isGym?'gym-check':''} ${isStreakMilestone?'streak-7':''}" data-routine-label="${routineValue ? routineLabels[routineValue] : ''}" data-day="${i}" data-habit="${h.id}" onclick="toggleCell(this, '${h.id}', ${i}, '${h.icon}')"></td>`;
                 });
-                let achv = (checkedT === state.habits.length) ? '🏆' : (checkedT > 0 ? `🏅 <span class="text-[10px] font-bold text-slate-400 align-middle">${checkedT}</span>` : '');
-                row.innerHTML += `<td class="p-2 text-center text-xl min-w-[60px]"><span class="${achv ? 'reward-animate' : ''} block">${achv}</span></td>`;
-                body.appendChild(row);
+                
+                let trophyHtml = '';
+                if (rowIsComplete && habitsConfig.length > 0) {
+                    totalPerfectDays++;
+                    trophyHtml = `<span class="trophy-display ${getTrophyClass(totalPerfectDays)}">🏆</span>`;
+                    tr.classList.add('row-full-complete');
+                } else if (habitsMarkedCount > 0) {
+                    trophyHtml = `<span class="trophy-display medal-display text-amber-800 opacity-20">🏅</span>`;
+                }
+                html += `<td class="trophy-col">${trophyHtml}</td>`;
+                tr.innerHTML = html; trackerBody.appendChild(tr);
             }
         }
 
-        // --- LOGICA DE RACHAS ---
-        function checkStreaksCelebration(day) {
-            const data = getCurrentMonthData();
-            const habitsReached = [];
-            let monthComplete = false;
-            const dMonth = new Date(displayYear, displayMonth + 1, 0).getDate();
-            state.habits.forEach(habit => {
-                const hist = (data.history[habit.id] || []).sort((a,b) => a - b);
-                let currentS = 0;
-                for (let i = 0; i < 31; i++) { if (hist.includes(day - i)) currentS++; else break; }
-                const ms = [7, 14, 21, 28];
-                if (ms.includes(currentS)) {
-                    if (!data.celebratedStreaks[habit.id]) data.celebratedStreaks[habit.id] = [];
-                    if (!data.celebratedStreaks[habit.id].includes(currentS)) {
-                        habitsReached.push({ name: habit.name, streak: currentS });
-                        data.celebratedStreaks[habit.id].push(currentS);
-                    }
+        function toggleCell(cell, hId, day, hIcon) {
+            const isGym = hId.toLowerCase().includes('gym') || hIcon.includes('dumbbell');
+            if (isGym) {
+                activeGymDayOfMonth = day;
+                document.getElementById('main-modal').classList.remove('hidden');
+                document.getElementById('modal-tabs-header').classList.add('hidden');
+                document.getElementById('btn-save-all').classList.add('hidden');
+                switchTab('gym-day-selector');
+            } else {
+                cell.classList.toggle('completed');
+                const isNowCompleted = cell.classList.contains('completed');
+                if(isNowCompleted) { playSfx(600, 'triangle', 0.1, 0.05); checkStreakCongratulation(hId, day); } 
+                else playSfx(140, 'triangle', 0.15, 0.15);
+                saveMatrixState(); renderRightPage();
+                const row = document.getElementById(`row-${day}`);
+                if(row && row.classList.contains('row-full-complete') && isNowCompleted) playVictory();
+            }
+        }
+
+        function setGymDay(dayIndex) {
+            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
+            saved.habits = saved.habits || {};
+            const gymHabit = habitsConfig.find(h => h.id.toLowerCase().includes('gym') || h.icon.includes('dumbbell'));
+            if(!gymHabit) return;
+            saved.habits[`${activeGymDayOfMonth}-${gymHabit.id}`] = dayIndex;
+            localStorage.setItem('planner_data_v104_1', JSON.stringify(saved));
+            playSfx(600, 'triangle', 0.1, 0.05);
+            closeModal(); renderRightPage();
+            const row = document.getElementById(`row-${activeGymDayOfMonth}`);
+            if(row && row.classList.contains('row-full-complete')) playVictory();
+        }
+
+        function clearGymCheck() {
+            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
+            const gymHabit = habitsConfig.find(h => h.id.toLowerCase().includes('gym') || h.icon.includes('dumbbell'));
+            if(gymHabit && saved.habits) delete saved.habits[`${activeGymDayOfMonth}-${gymHabit.id}`];
+            localStorage.setItem('planner_data_v104_1', JSON.stringify(saved));
+            closeModal(); renderRightPage();
+        }
+
+        function cycleMood(day) {
+            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
+            saved.moods = saved.moods || {};
+            const current = saved.moods[day] || '😐';
+            const idx = moodConfig.findIndex(m => m.icon === current);
+            saved.moods[day] = moodConfig[(idx + 1) % moodConfig.length].icon;
+            localStorage.setItem('planner_data_v104_1', JSON.stringify(saved));
+            playPop(); renderRightPage(); checkMoodAlert();
+        }
+
+        function checkMoodAlert() {
+            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
+            const moods = saved.moods || {};
+            const negativeIcons = ['🙁', '😢', '😭', '😫']; 
+            const alertLog = JSON.parse(localStorage.getItem('planner_mood_alert_v104_1') || '{}');
+            alertLog.notifiedStreaks = alertLog.notifiedStreaks || [];
+            for (let i = 4; i <= daysInMonth; i++) {
+                let negativeStreakCount = 0;
+                for (let j = 0; j < 4; j++) { if (moods[i-j] && negativeIcons.includes(moods[i-j])) negativeStreakCount++; else break; }
+                if (negativeStreakCount === 4 && !alertLog.notifiedStreaks.includes(i)) {
+                    setTimeout(() => { showToast("Llevas unos días de ánimo bajo. Prioriza el descanso. ¡Mucho ánimo!", "alert"); playSfx(300, 'sine', 0.8, 0.1); }, 1000);
+                    alertLog.notifiedStreaks.push(i); localStorage.setItem('planner_mood_alert_v104_1', JSON.stringify(alertLog));
+                    return;
                 }
-                if (day === dMonth && hist.length === dMonth) {
-                    if (!data.celebratedStreaks[habit.id]?.includes(99)) {
-                        monthComplete = true;
-                        if (!data.celebratedStreaks[habit.id]) data.celebratedStreaks[habit.id] = [];
-                        data.celebratedStreaks[habit.id].push(99);
+            }
+        }
+
+        function checkInactivityAlerts() {
+            const todayDay = new Date().getDate();
+            if (![7, 14, 21, 28, 31].includes(todayDay)) return;
+            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
+            const alertLog = JSON.parse(localStorage.getItem('planner_alerts_v104_1') || '{}');
+            if (alertLog.lastDate === todayDay) return;
+            
+            let alertsShown = 0;
+            habitsConfig.forEach(h => {
+                let empty = 0;
+                for (let d = todayDay - 6; d <= todayDay; d++) if (d > 0 && !saved.habits[`${d}-${h.id}`]) empty++;
+                if (empty >= 5) {
+                     setTimeout(() => { showToast(`Esta semana no has hecho ${h.name}, aún estás a tiempo. ¡Ánimo!`, "alert"); }, alertsShown * 4000);
+                     alertsShown++;
+                }
+            });
+            if (alertsShown > 0) { alertLog.lastDate = todayDay; localStorage.setItem('planner_alerts_v104_1', JSON.stringify(alertLog)); }
+        }
+
+        function checkStreakCongratulation(hId, day) {
+            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
+            let streak = 0; for (let d = day; d > 0; d--) if (saved.habits && saved.habits[`${d}-${hId}`]) streak++; else break;
+            if (streak === 7) showToast(`¡Racha de 7 días en ${hId.toUpperCase()}!`, "success");
+        }
+
+        function saveMatrixState() {
+            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
+            const habits = saved.habits || {};
+            habitsConfig.forEach(h => {
+                if (!(h.id.toLowerCase().includes('gym'))) {
+                    for (let i = 1; i <= daysInMonth; i++) {
+                        const cell = document.querySelector(`.tracker-cell[data-day="${i}"][data-habit="${h.id}"]`);
+                        if (cell && cell.classList.contains('completed')) habits[`${i}-${h.id}`] = true;
+                        else if (cell) delete habits[`${i}-${h.id}`];
                     }
                 }
             });
-            if (monthComplete) showFinalMonthCelebration();
-            else if (habitsReached.length > 0) showStreakCelebration(habitsReached);
+            saved.habits = habits; localStorage.setItem('planner_data_v104_1', JSON.stringify(saved));
         }
 
-        function checkMoodSupport(day) {
-            const moods = getCurrentMonthData().moods;
-            let lowS = 0;
-            for (let i = 0; i < 5; i++) {
-                const dIdx = day - i; if(dIdx < 1) break;
-                const mObj = MOODS.find(m => m.icon === moods[dIdx]);
-                if (mObj && mObj.val <= 4) lowS++; else break;
-            }
-            if (lowS === 5) showMoodSupportModal();
+        function loadConfig() {
+            habitsConfig = JSON.parse(localStorage.getItem('planner_config_v104_1')) || [
+                {id:'piano',name:'Piano',icon:'fa-music', tip:'Practicar 30 min'},
+                {id:'gym',name:'Gym',icon:'fa-dumbbell', tip:'Rutina split'},
+                {id:'leer',name:'Lectura',icon:'fa-book', tip:'15 min lectura'}
+            ];
+            profileData = JSON.parse(localStorage.getItem('planner_profile_v104_1')) || {name:'Neuropsicólogo', age:'38', height:'183', weight:'84', avatar:'fa-brain'};
+            myRoutines = JSON.parse(localStorage.getItem('planner_routines_v104_1')) || [{ id: 1, name: "Tirón 1", exercises: "Remo" }, { id: 2, name: "Empuje 1", exercises: "Press" }, { id: 3, name: "Pierna", exercises: "Sentadilla" }, { id: 4, name: "Tirón 2", exercises: "Dominadas" }, { id: 5, name: "Empuje 2", exercises: "Militar" }];
         }
 
-        function showStreakCelebration(ms) {
-            const modal = document.getElementById('streak-modal'); const list = document.getElementById('streak-habits-list'); list.innerHTML = '';
-            ms.forEach(m => { list.innerHTML += `<div class="bg-slate-50 p-4 rounded-2xl border flex justify-between font-bold"><span>${m.name}</span><span class="text-indigo-600">${m.streak} DÍAS</span></div>`; });
-            modal.classList.remove('hidden'); playSound('victory');
-        }
-        function showFinalMonthCelebration() { document.getElementById('streak-modal').classList.remove('hidden'); document.getElementById('streak-icon').innerText = '👑'; document.getElementById('streak-title').innerText = '¡MAESTRÍA TOTAL!'; playSound('victory'); }
-        function showMoodSupportModal() { document.getElementById('mood-support-modal').classList.remove('hidden'); playSound('support'); }
-        function closeMoodSupportModal() { document.getElementById('mood-support-modal').classList.add('hidden'); }
-        function closeStreakModal() { document.getElementById('streak-modal').classList.add('hidden'); }
-
-        // --- HANDLERS ---
-        function toggleDay(id, d) {
-            const data = getCurrentMonthData();
-            const h = state.habits.find(x => String(x.id) === String(id));
-            const isGym = h.name.toLowerCase().includes('gimnasio');
-            if (!data.history[id]) data.history[id] = [];
-            const idx = data.history[id].indexOf(d);
-            if (idx > -1) { data.history[id].splice(idx, 1); if(isGym) delete data.gymLogs[d]; playSound('uncheck'); } 
-            else { if(isGym) { currentGymDay = d; openRoutinePicker(); return; } completeCheck(id, d); }
-            saveState(); renderAll();
-        }
-        function completeCheck(id, d) {
-            const data = getCurrentMonthData();
-            if (!data.history[id]) data.history[id] = [];
-            data.history[id].push(d); playSound('check');
-            if (state.habits.every(h => (data.history[h.id] || []).includes(d))) setTimeout(() => playSound('victory'), 400);
-            checkStreaksCelebration(d); saveState(); renderAll();
-        }
-        function openMoodPicker(e, d) {
-            const p = document.getElementById('mood-picker'); p.innerHTML = '';
-            MOODS.forEach(m => { 
-                const b = document.createElement('button'); b.className = "flex flex-col items-center gap-1 p-2 hover:bg-indigo-50 rounded-xl transition-all"; 
-                b.innerHTML = `<span class="text-2xl">${m.icon}</span><span class="text-[9px] font-bold text-slate-400 uppercase text-center">${m.label}</span>`; 
-                b.onclick = () => { getCurrentMonthData().moods[d] = m.icon; playSound('mood'); checkMoodSupport(d); saveState(); renderAll(); p.classList.add('hidden'); }; p.appendChild(b); 
-            });
-            const r = e.target.getBoundingClientRect(); p.style.top = `${r.bottom + window.scrollY + 5}px`; p.style.left = `${r.left + window.scrollX - 100}px`; p.classList.remove('hidden');
-            const c = (ev) => { if (!p.contains(ev.target) && ev.target !== e.target) { p.classList.add('hidden'); document.removeEventListener('click', c); }};
-            setTimeout(() => document.addEventListener('click', c), 10);
+        function saveAllSettings() {
+            localStorage.setItem('gemini_api_key', document.getElementById('api-key-input').value.trim());
+            profileData.name = document.getElementById('p-name').value;
+            profileData.age = document.getElementById('p-age').value;
+            profileData.weight = document.getElementById('p-weight').value;
+            localStorage.setItem('planner_profile_v104_1', JSON.stringify(profileData));
+            localStorage.setItem('planner_config_v104_1', JSON.stringify(habitsConfig));
+            localStorage.setItem('planner_routines_v104_1', JSON.stringify(myRoutines));
+            saveMatrixState(); closeModal(); init();
         }
 
-        // --- ANALISIS ---
-        function openAnalysis() { document.getElementById('analysis-modal').classList.remove('hidden'); calculateStats(); }
-        function closeAnalysis() { document.getElementById('analysis-modal').classList.add('hidden'); }
-        function calculateStats() {
-            const data = getCurrentMonthData(); const dMonth = new Date(displayYear, displayMonth + 1, 0).getDate();
-            const ids = state.habits.map(h => String(h.id));
-            let pd = 0, ts = 0, mv = []; let dp = [];
-            for (let d = 1; d <= dMonth; d++) {
-                let daily = 0; ids.forEach(id => { if((data.history[id] || []).includes(d)) { daily++; ts++; } });
-                const perc = (daily / ids.length) * 100;
-                const m = MOODS.find(mo => mo.icon === data.moods[d]);
-                if(m) { mv.push(m.val); dp.push({ x: m.val, y: perc }); }
-                if (daily === ids.length) pd++;
-            }
-            document.getElementById('stat-perfect-days').innerText = pd;
-            document.getElementById('stat-total-stars').innerText = ts;
-            const adh = Math.round((ts / (ids.length * dMonth)) * 100) || 0;
-            document.getElementById('stat-global-avg').innerText = adh + '%';
-            const avgM = mv.length ? Math.round(mv.reduce((a,b)=>a+b)/mv.length) : 5;
-            document.getElementById('stat-avg-mood-label').innerText = MOODS.find(m => m.val === avgM)?.label || 'Normal';
-
-            if (habitsChart) habitsChart.destroy();
-            habitsChart = new Chart(document.getElementById('habitsChart'), { type: 'bar', data: { labels: state.habits.map(h=>h.name), datasets: [{ data: state.habits.map(h=>Math.round(((data.history[h.id]||[]).length/dMonth)*100)), backgroundColor: '#6366f1', borderRadius: 8 }] }, options: { plugins: { legend: { display: false } } } });
-            if (correlationChart) correlationChart.destroy();
-            correlationChart = new Chart(document.getElementById('moodCorrelationChart'), { type: 'scatter', data: { datasets: [{ label: 'Dias', data: dp, backgroundColor: '#ec4899' }] }, options: { scales: { x: { min: 1, max: 8, title: {display: true, text: 'Mood'} }, y: { min: 0, max: 100, title: {display: true, text: '% Exito'} } } } });
+        function openSettings(tab) { document.getElementById('main-modal').classList.remove('hidden'); switchTab(tab || 'tab-profile'); }
+        function openMealSelector() { document.getElementById('main-modal').classList.remove('hidden'); switchTab('tab-meals'); }
+        function openWorkoutSelector() { document.getElementById('main-modal').classList.remove('hidden'); switchTab('tab-workouts'); }
+        function closeModal() { document.getElementById('main-modal').classList.add('hidden'); document.getElementById('modal-tabs-header').classList.remove('hidden'); document.getElementById('btn-save-all').classList.remove('hidden'); }
+        function switchTab(id, isAgent = false) {
+            document.querySelectorAll('.tab-content, #ia-result').forEach(x => x.classList.add('hidden'));
+            const t = document.getElementById(id); if(t) t.classList.remove('hidden');
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            const btn = document.getElementById('btn-'+id); if(btn) btn.classList.add('active');
+            if (id === 'gym-day-selector') { document.getElementById('modal-tabs-header').classList.add('hidden'); document.getElementById('btn-save-all').classList.add('hidden'); }
+            else { document.getElementById('modal-tabs-header').classList.remove('hidden'); document.getElementById('btn-save-all').classList.remove('hidden'); }
+        }
+        function renderGymRoutinesUI() {
+            document.getElementById('gym-editor-list').innerHTML = myRoutines.map((r, idx) => `<div class="mb-4 bg-slate-50 p-3 rounded-lg"><input type="text" value="${r.name}" onchange="updateRoutineData(${idx}, 'name', this.value)" class="border-b font-bold w-full mb-1 outline-none text-xs"><textarea rows="2" onchange="updateRoutineData(${idx}, 'exercises', this.value)" class="text-[10px] w-full bg-transparent">${r.exercises}</textarea></div>`).join('');
+            document.getElementById('gym-routine-grid').innerHTML = myRoutines.map(r => `<button onclick="setGymDay(${r.id})" class="btn-option"><strong>Día ${r.id}: ${r.name}</strong></button>`).join('');
+        }
+        function updateRoutineData(index, field, value) { myRoutines[index][field] = value; }
+        function showToast(m, mode = "") { const t=document.getElementById('toast-notification'); t.innerText=m; t.classList.remove('alert-mode', 'success-mode'); if(mode) t.classList.add(mode+'-mode'); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),6000); }
+        function getMetalClass(count) { if (count <= 7) return 'bronze-mark'; if (count <= 14) return 'silver-mark'; if (count <= 21) return 'gold-mark'; return 'super-gold-mark'; }
+        function getTrophyClass(count) { if (count <= 7) return 'trophy-gold'; if (count <= 14) return 'trophy-silver'; if (count <= 21) return 'trophy-gold'; return 'trophy-super'; }
+        function downloadHTML() { document.querySelectorAll('input, textarea').forEach(i => i.setAttribute('value', i.value)); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(["<!DOCTYPE html>\n"+document.documentElement.outerHTML], {type:'text/html'})); a.download = 'Habitos_Atomicos_v104_2.html'; a.click(); }
+        function exportCSV() { let csv = "Día,Mood"; habitsConfig.forEach(h=>csv+=`,${h.name}`); csv+="\n"; const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}'); for (let i = 1; i <= daysInMonth; i++) { csv += `${i},${saved.moods ? saved.moods[i] : ''}`; habitsConfig.forEach(h=>csv+=`,${saved.habits&&saved.habits[i+'-'+h.id]?1:0}`); csv+="\n"; } const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' }); const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = `Habitos_v104.csv`; link.click(); }
+        function confirmReset() { if(confirm("¿BORRAR TODO?")) { localStorage.clear(); location.reload(); } }
+        function renderHabitsUI() { document.getElementById('habits-list-ui').innerHTML = habitsConfig.map((h,i) => `<div class="flex justify-between items-center bg-white p-2 mb-1 border-b rounded"><span>${h.name}</span><button onclick="remHabit(${i})" class="text-red-400 font-bold px-2">✕</button></div>`).join(''); }
+        function addHabitAction() { const n = document.getElementById('h-name').value.toUpperCase().trim(); const t = document.getElementById('h-tip').value.trim(); if(!n) return; habitsConfig.push({id: n.toLowerCase().replace(/\s/g,''), name: n, icon: 'fa-star', tip: t}); renderHabitsUI(); }
+        function remHabit(i) { habitsConfig.splice(i,1); renderHabitsUI(); }
+        function updateProfileDisplay() { 
+            const nameEl = document.getElementById('display-name');
+            if (nameEl) nameEl.innerText = profileData.name || "Enero 2026"; 
         }
 
-        // --- AJUSTES ---
-        function toggleSettings() { const m = document.getElementById('settings-modal'); m.classList.toggle('hidden'); if (!m.classList.contains('hidden')) { document.getElementById('input-name').value = state.profile.name; document.getElementById('input-age').value = state.profile.age; document.getElementById('input-weight').value = state.profile.weight; renderSuggestions(); renderHabitInputs(); } }
-        function renderSuggestions() { const c = document.getElementById('suggestions-container'); c.innerHTML = ''; SUGGESTED_HABITS.forEach(h => { const chip = document.createElement('div'); chip.className = "suggestion-chip"; chip.innerText = `+ ${h.name}`; chip.onclick = () => { if (state.habits.length < 10) { state.habits.push({ id: Date.now().toString(), name: h.name, desc: h.desc }); renderHabitInputs(); } }; c.appendChild(chip); }); }
-        function renderHabitInputs() { const c = document.getElementById('habits-list-config'); c.innerHTML = ''; state.habits.forEach((h, i) => { c.innerHTML += `<div class="flex gap-2 p-2 bg-slate-50 rounded-xl border mb-2"><input type="text" value="${h.name}" class="flex-1 p-2 border rounded-lg habit-name-input"><input type="text" value="${h.desc}" class="flex-[2] p-2 border rounded-lg habit-desc-input"><button onclick="state.habits.splice(${i}, 1); renderHabitInputs();" class="text-red-400 px-2 text-xl">✕</button></div>`; }); }
-        function addHabitInput() { if (state.habits.length < 10) { state.habits.push({ id: Date.now().toString(), name: '', desc: '' }); renderHabitInputs(); } }
-        function saveSettings() { state.profile.name = document.getElementById('input-name').value; state.profile.age = parseInt(document.getElementById('input-age').value); state.profile.weight = parseInt(document.getElementById('input-weight').value); const ns = document.querySelectorAll('.habit-name-input'), ds = document.querySelectorAll('.habit-desc-input'); state.habits = Array.from(ns).map((n, i) => ({ id: state.habits[i]?.id || Date.now().toString()+i, name: n.value, desc: ds[i].value })).filter(h => h.name.trim()); saveState(); toggleSettings(); renderAll(); }
-        function openRoutinePicker() { const m = document.getElementById('routine-modal'); const o = document.getElementById('routine-options'); o.innerHTML = ''; state.routines.forEach(r => { const div = document.createElement('div'); div.className = "routine-card"; div.onclick = () => { getCurrentMonthData().gymLogs[currentGymDay] = r.id; m.classList.add('hidden'); completeCheck(state.habits.find(h=>h.name.toLowerCase().includes('gimnasio')).id, currentGymDay); }; div.innerHTML = `<strong>${r.id}</strong><br><small>${r.name}</small>`; o.appendChild(div); }); m.classList.remove('hidden'); }
-        function cancelRoutine() { document.getElementById('routine-modal').classList.add('hidden'); }
-        function toggleRoutineSettings() { const m = document.getElementById('routine-settings-modal'); const l = document.getElementById('routine-edit-list'); l.innerHTML = ''; state.routines.forEach(r => { l.innerHTML += `<div class="p-3 bg-slate-50 border rounded-xl mb-2"><strong>${r.id}</strong><input type="text" value="${r.name}" class="routine-name-edit block w-full border rounded p-1 my-1"><textarea class="routine-desc-edit block w-full border rounded p-1">${r.desc}</textarea></div>`; }); m.classList.toggle('hidden'); }
-        function saveRoutineSettings() { const ns = document.querySelectorAll('.routine-name-edit'), ds = document.querySelectorAll('.routine-desc-edit'); state.routines.forEach((r, i) => { r.name = ns[i].value; r.desc = ds[i].value; }); saveState(); document.getElementById('routine-settings-modal').classList.add('hidden'); renderAll(); }
-        function showLegend(id) { const h = state.habits.find(x => String(x.id) === String(id)); document.getElementById('legend-title').innerText = h.name; document.getElementById('legend-desc').innerText = h.desc || "Sin descripción."; document.getElementById('legend-modal').classList.remove('hidden'); }
-        function closeLegend() { document.getElementById('legend-modal').classList.add('hidden'); }
-
-        function saveState() { localStorage.setItem('neuroHabitData_final_v19', JSON.stringify(state)); }
-        
-        window.onload = () => {
-            const saved = localStorage.getItem('neuroHabitData_final_v19');
-            if (saved) state = Object.assign(state, JSON.parse(saved));
-            renderAll();
-        };
+        window.onload = init;
     </script>
-
-</body></html>
+</body>
+</html>
