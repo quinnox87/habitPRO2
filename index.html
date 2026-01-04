@@ -2,588 +2,564 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Habitos Atomicos v104.2 - Fix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroHabit Tracker - Planificador de Hábitos</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* --- TIPOGRAFÍA --- */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
 
         :root {
-            --paper-bg: #FFFFFF;         
-            --ink-primary: #0F172A;      
-            --ink-secondary: #475569;    
-            --accent-vibrant: #6366F1;   
-            --accent-green: #10B981;     
-            --accent-gold: #F59E0B;      
-            --accent-danger: #EF4444;    
-            --line-soft: #F1F5F9;
-            --weekend-bg: #E2E8F0;      
-            --holiday-bg: #FEE2E2;      
-            --metal-bronze: #D97706;
-            --metal-silver: #64748B;
-            --metal-gold: #F59E0B;
-            --metal-super: #4F46E5;      
-            --shadow-pop: 0 20px 25px -5px rgba(0,0,0,0.15), 0 8px 10px -6px rgba(0,0,0,0.1);
-            --champion-success: rgba(16, 185, 129, 0.12); 
+            --primary: #6366f1;
+            --bg: #f8fafc;
+            /* Niveles Cromáticos */
+            --tier-bronze: linear-gradient(135deg, #a87932 0%, #78350f 100%);
+            --tier-silver: linear-gradient(135deg, #94a3b8 0%, #475569 100%);
+            --tier-gold: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+            --tier-platinum: linear-gradient(135deg, #fff7ad 0%, #ffd700 50%, #facc15 100%);
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            background-color: #CBD5E1;
-            background-image: radial-gradient(var(--accent-vibrant) 0.5px, transparent 0.5px);
-            background-size: 40px 40px;
-            color: var(--ink-primary);
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #f0f4ff 0%, #fff1f2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 0;
-            -webkit-font-smoothing: antialiased;
+            color: #1e293b;
+            padding-bottom: 2rem;
         }
 
-        /* --- CONTENEDOR ADAPTATIVO --- */
-        .page-container {
-            width: 100%;
-            max-width: 900px;
-            background: var(--paper-bg);
-            box-shadow: var(--shadow-pop);
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh;
-            position: relative;
-            padding: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .page-container {
-                margin: 2rem;
-                min-height: 297mm;
-                border-radius: 12px;
-                padding: 14mm 16mm;
-                border: 2px solid var(--ink-primary);
-            }
-        }
-
-        h1 { font-weight: 900; font-size: 1.5rem; letter-spacing: -0.04em; color: var(--ink-primary); }
-        .subtitle { font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent-vibrant); }
-
-        /* --- MATRIZ MOBILE FRIENDLY --- */
-        .tracker-container { 
-            display: flex; 
-            flex-direction: column; 
-            flex-grow: 1; 
-            margin-top: 1.5rem; 
-            overflow: hidden; 
-            padding-bottom: 80px; 
-        }
-        
-        .table-wrapper { 
-            flex-grow: 1; 
-            overflow: auto; 
-            border: 1px solid var(--ink-primary); 
-            background: white; 
-            border-radius: 8px; 
-            position: relative;
-        }
-
-        .tracker-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-        .tracker-table th { 
-            font-size: 0.5rem; font-weight: 900; text-align: center; vertical-align: bottom; padding: 8px 2px;
-            height: 50px; border-bottom: 2px solid var(--ink-primary); color: white; background: var(--ink-primary); 
-            position: sticky; top: 0; z-index: 30; cursor: pointer;
-        }
-        
-        .tracker-table td { height: 35px; border-bottom: 1px solid var(--line-soft); border-right: 1px solid var(--line-soft); text-align: center; position: relative; }
-        
-        .day-col { 
-            font-weight: 900; font-size: 0.75rem; width: 35px !important; 
-            background: #F1F5F9; color: var(--ink-primary); 
-            border-right: 2px solid var(--ink-primary) !important;
-            position: sticky; left: 0; z-index: 20;
-        }
-
-        .weekend-row td:not(.day-col):not(.trophy-col) { background-color: var(--weekend-bg); }
-        .holiday-row td:not(.day-col):not(.trophy-col) { background-color: var(--holiday-bg); }
-        .holiday-row .day-col { color: var(--accent-danger) !important; background-color: #FEE2E2; }
-
-        .mood-col { width: 55px !important; border-right: 2px solid var(--ink-primary) !important; }
-        
-        .mood-selector { cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
-        .mood-emoji { font-size: 1.2rem; line-height: 1; }
-        .mood-label { font-size: 0.4rem; font-weight: 900; text-transform: uppercase; color: var(--ink-secondary); margin-top: 2px; }
-
-        .tracker-cell { cursor: pointer; position: relative; min-width: 45px; }
-        .tracker-cell.completed::after {
-            content: '\2605'; 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px; z-index: 10; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .tracker-cell.completed.streak-7::after { font-size: 28px !important; z-index: 15; transform: scale(1.15); filter: drop-shadow(0 0 8px white); }
-
-        .bronze-mark.completed::after { color: var(--metal-bronze); }
-        .silver-mark.completed::after { color: var(--metal-silver); }
-        .gold-mark.completed::after { color: var(--metal-gold); }
-        .super-gold-mark.completed::after { color: var(--metal-super); filter: drop-shadow(0 0 5px var(--accent-vibrant)); }
-
-        tr.row-full-complete td:not(.day-col):not(.trophy-col) { background-color: var(--champion-success) !important; }
-        .trophy-col { width: 45px !important; border-left: 2px solid var(--ink-primary); background: #F8FAFC; }
-        .trophy-display { font-size: 1.2rem; display: flex; align-items: center; justify-content: center; height: 100%; }
-
-        /* --- NAVEGACIÓN MÓVIL --- */
-        .mobile-nav {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: rgba(255, 255, 255, 0.95);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
-            display: flex; justify-content: space-around;
-            padding: 0.75rem 0.5rem;
-            border-top: 1px solid var(--line-soft);
-            z-index: 100;
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
         }
 
-        .nav-item {
-            display: flex; flex-direction: column; align-items: center;
-            gap: 4px; color: var(--ink-secondary);
-            font-size: 0.6rem; font-weight: 800; text-transform: uppercase;
+        .weekend-row { background-color: rgba(99, 102, 241, 0.05) !important; }
+        .holiday-row { background-color: rgba(239, 68, 68, 0.04) !important; }
+
+        .habit-cell {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            user-select: none;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            position: relative;
+            background: white;
         }
-        .nav-item.active { color: var(--accent-vibrant); }
-        .nav-item i { font-size: 1.2rem; }
 
-        @media (min-width: 768px) {
-            .mobile-nav { display: none; }
-            .tracker-container { padding-bottom: 0; }
+        .habit-cell:hover { transform: scale(1.1); background-color: #f1f5f9; }
+
+        .checked.tier-bronze { background: var(--tier-bronze); box-shadow: 0 4px 10px rgba(120, 53, 15, 0.2); }
+        .checked.tier-silver { background: var(--tier-silver); box-shadow: 0 4px 10px rgba(71, 85, 105, 0.2); }
+        .checked.tier-gold { background: var(--tier-gold); box-shadow: 0 4px 10px rgba(184, 134, 11, 0.3); border-color: rgba(255,255,255,0.2) !important; }
+        .checked.tier-platinum { 
+            background: var(--tier-platinum); 
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.4); 
+            animation: pulse-glow 1.8s infinite;
+            border-color: #ffffff !important;
+            color: #854d0e !important;
         }
 
-        /* MODAL FULLSCREEN EN MÓVIL */
-        @media (max-width: 767px) {
-            .modal-card { width: 100% !important; height: 100% !important; max-width: none !important; border-radius: 0 !important; border: none !important; }
-            .tab-btn { padding: 10px 12px; font-size: 0.6rem; }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 8px rgba(250, 204, 21, 0.3); transform: scale(1); }
+            50% { box-shadow: 0 0 18px rgba(250, 204, 21, 0.6); transform: scale(1.03); }
         }
 
-        #toast-notification { 
-            visibility: hidden; min-width: 280px; background-color: var(--ink-primary); color: white; text-align: center; 
-            padding: 16px; position: fixed; z-index: 2000; left: 50%; bottom: 100px; transform: translateX(-50%); 
-            font-size: 0.8rem; border-radius: 10px; opacity: 0; transition: 0.4s; font-weight: 700;
-            border-left: 8px solid var(--accent-gold); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        .routine-tag { font-size: 0.55rem; font-weight: 800; margin-top: -2px; text-transform: uppercase; opacity: 0.9; }
+
+        @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .checked { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); color: white; border-color: transparent !important; }
+
+        .mood-cell {
+            cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; border-radius: 50%; transition: background 0.2s; margin: 0 auto;
+            border: 1px solid transparent;
         }
-        #toast-notification.show { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0); }
-        #toast-notification.alert-mode { border-left-color: var(--accent-danger); }
-        #toast-notification.success-mode { border-left-color: var(--accent-green); }
+        .mood-cell:hover { background: #f1f5f9; border-color: #e2e8f0; }
 
-        .loading-ia { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 20px; font-weight: 800; color: var(--accent-gold); }
+        .matrix-container { overflow-x: auto; max-height: 65vh; overflow-y: auto; scrollbar-width: thin; border-radius: 1rem; }
+        .sticky-col { position: sticky; left: 0; background: white; z-index: 20; min-width: 70px; text-align: center; font-weight: bold; border-right: 2px solid #f1f5f9; }
+        .sticky-row { position: sticky; top: 0; background: white; z-index: 30; }
 
-        @keyframes popIn { from { transform: scale(0) rotate(-45deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
-        .no-print { user-select: none; }
+        .tooltip { position: relative; }
+        .tooltip:hover::after {
+            content: attr(data-description); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
+            background: #1e293b; color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.7rem; white-space: nowrap; z-index: 50;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        @keyframes victory { 0% { transform: scale(0); rotate: -45deg; } 70% { transform: scale(1.2); rotate: 10deg; } 100% { transform: scale(1); rotate: 0deg; } }
+        .reward-animate { animation: victory 0.5s ease-out forwards; }
+
+        .routine-card { cursor: pointer; transition: all 0.2s; border: 2px solid #f1f5f9; border-radius: 1rem; padding: 1rem; text-align: center; }
+        .routine-card:hover { transform: translateY(-2px); border-color: var(--primary); background: #f5f3ff; }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        .stat-card { background: white; padding: 1rem; border-radius: 1.25rem; border: 1px solid #f1f5f9; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .insight-box { background: #fdf2f8; border: 1px solid #fce7f3; padding: 1.5rem; border-radius: 1.5rem; }
+
+        .suggestion-chip {
+            background: #f1f5f9; color: #475569; padding: 0.4rem 0.8rem; border-radius: 9999px;
+            font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+            border: 1px solid #e2e8f0; white-space: nowrap;
+        }
+        .suggestion-chip:hover { background: #e0e7ff; color: #4f46e5; border-color: #c7d2fe; transform: translateY(-1px); }
+
+        .month-nav-btn {
+            background: white; border: 1px solid #e2e8f0; width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;
+        }
+        .month-nav-btn:hover { background: #f8fafc; border-color: #6366f1; color: #6366f1; transform: scale(1.1); }
     </style>
 </head>
-<body>
+<body class="p-4 md:p-6 lg:p-10">
 
-    <!-- BOTONES ESCRITORIO -->
-    <div class="no-print hidden md:flex fixed top-6 left-6 z-50 gap-3">
-        <button onclick="downloadHTML()" class="p-2 bg-white rounded-full shadow-md border border-slate-200" title="Guardar"><i class="fas fa-save text-indigo-600"></i></button>
-        <button onclick="exportCSV()" class="p-2 bg-white rounded-full shadow-md border border-slate-200" title="Exportar CSV"><i class="fas fa-file-csv text-green-600"></i></button>
-    </div>
-
-    <!-- NAVEGACIÓN MÓVIL -->
-    <nav class="mobile-nav no-print">
-        <button onclick="openMealSelector()" class="nav-item active"><i class="fas fa-utensils"></i><span>Chef</span></button>
-        <button onclick="openWorkoutSelector()" class="nav-item"><i class="fas fa-dumbbell"></i><span>Gym</span></button>
-        <button onclick="openSettings('tab-profile')" class="nav-item"><i class="fas fa-cog"></i><span>Ajustes</span></button>
-    </nav>
-
-    <div class="page-container">
-        <header class="flex justify-between items-center border-b-2 border-slate-900 pb-4 mb-2">
-            <div class="flex items-center gap-3">
-                <div id="display-avatar" class="w-10 h-10 md:w-14 md:h-14 rounded-full border-2 border-slate-900 flex items-center justify-center text-xl md:text-3xl bg-white shadow-sm"><i class="fas fa-brain"></i></div>
-                <div>
-                    <h1 id="display-name">Enero 2026</h1>
-                    <p class="subtitle italic">Habitos Atomicos</p>
-                </div>
+    <div class="max-w-7xl mx-auto">
+        <!-- Header Principal -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <div>
+                <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-pink-600">
+                    NeuroHabit Tracker
+                </h1>
+                <p id="profile-summary" class="text-slate-500 font-medium tracking-tight">Cargando datos del sistema...</p>
             </div>
-            
-            <div class="hidden md:flex gap-3 no-print">
-                <button onclick="openMealSelector()" class="p-2 border-2 border-slate-900 rounded-lg text-xs font-black bg-indigo-50"><i class="fas fa-utensils text-indigo-600"></i> NEURO-CHEF ✨</button>
-                <button onclick="openSettings('tab-profile')" class="p-2 border-2 border-slate-900 rounded-lg"><i class="fas fa-cog"></i></button>
+            <div class="flex flex-wrap justify-center gap-2">
+                <button onclick="exportFullHTML()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-full font-bold shadow-lg transition-all flex items-center gap-2">
+                    <span>💾 Guardar App</span>
+                </button>
+                <button onclick="openAnalysis()" class="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-5 py-2 rounded-full font-bold shadow-lg transition-transform hover:scale-105 flex items-center gap-2">
+                    <span>📊 Análisis</span>
+                </button>
+                <button onclick="toggleRoutineSettings()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full font-semibold text-sm transition-all border border-indigo-100">
+                    💪 Rutinas
+                </button>
+                <button onclick="toggleSettings()" class="bg-white hover:bg-slate-50 text-slate-700 px-6 py-2 rounded-full font-semibold shadow-sm border border-slate-200 transition-all flex items-center gap-2">
+                    <span>⚙️ Ajustes</span>
+                </button>
             </div>
         </header>
 
-        <div class="tracker-container">
-            <div class="table-wrapper" id="table-scroll-area">
-                <table class="tracker-table" id="tracker-table">
-                    <thead id="tracker-head"></thead>
-                    <tbody id="tracker-body"></tbody>
+        <!-- Matriz de Hábitos -->
+        <div class="glass-card p-6 mb-8 overflow-hidden">
+            <div class="flex items-center justify-center mb-8 gap-6">
+                <button onclick="changeMonth(-1)" class="month-nav-btn text-xl shadow-sm">←</button>
+                <h2 id="current-month-name" class="text-3xl font-black capitalize text-slate-800 tracking-tight min-w-[220px] text-center">Enero 2026</h2>
+                <button onclick="changeMonth(1)" class="month-nav-btn text-xl shadow-sm">→</button>
+            </div>
+
+            <div class="matrix-container shadow-inner border border-slate-100">
+                <table class="w-full border-collapse bg-white">
+                    <thead class="sticky-row">
+                        <tr id="matrix-header" class="bg-slate-50/80"></tr>
+                    </thead>
+                    <tbody id="matrix-body"></tbody>
                 </table>
             </div>
         </div>
-
-        <footer class="mt-4 flex justify-between items-center text-[0.55rem] font-black text-slate-900 uppercase tracking-widest italic opacity-40">
-            <span>Granada • ES</span>
-            <span>Neuro-Chef v104.2</span>
-        </footer>
     </div>
 
-    <!-- MODAL -->
-    <div id="main-modal" class="no-print fixed inset-0 hidden z-[200] flex items-center justify-center p-0 md:p-4 bg-slate-900/60 backdrop-blur-sm">
-        <div class="modal-card p-6 w-full transform transition-all scale-100 flex flex-col">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-300 hover:text-slate-600 transition z-50"><i class="fas fa-times fa-lg"></i></button>
-            
-            <div class="modal-tabs overflow-x-auto whitespace-nowrap" id="modal-tabs-header">
-                <div id="btn-tab-profile" class="tab-btn active" onclick="switchTab('tab-profile')">PERFIL</div>
-                <div id="btn-tab-habits" class="tab-btn" onclick="switchTab('tab-habits')">HÁBITOS</div>
-                <div id="btn-tab-meals" class="tab-btn" onclick="switchTab('tab-meals')">CHEF IA</div>
-                <div id="btn-tab-workouts" class="tab-btn" onclick="switchTab('tab-workouts')">GIMNASIO</div>
-                <div id="btn-tab-system" class="tab-btn" onclick="switchTab('tab-system')">SISTEMA</div>
-            </div>
-            
-            <div id="ia-result" class="hidden mb-6 p-4 bg-slate-900 text-white italic text-sm rounded-lg border-l-4 border-amber-500 shadow-xl overflow-y-auto">
-                 <button onclick="document.getElementById('ia-result').classList.add('hidden')" class="absolute top-2 right-2 text-white opacity-50 hover:opacity-100 text-xs">✕</button>
-                 <div id="ia-content"></div>
-            </div>
+    <!-- MODAL DE CELEBRACIÓN -->
+    <div id="streak-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-md hidden z-[200] flex items-center justify-center p-4">
+        <div class="streak-alert bg-white w-full max-w-md rounded-[2.5rem] p-10 shadow-2xl text-center border-b-8 border-indigo-500" id="streak-modal-box">
+            <div class="text-7xl mb-4" id="streak-icon">🔥</div>
+            <h2 class="text-3xl font-black text-slate-800 mb-2" id="streak-title">¡LOGRO!</h2>
+            <p class="text-slate-500 mb-6 font-medium" id="streak-subtitle">Consolidando nuevas vías neuronales.</p>
+            <div id="streak-habits-list" class="flex flex-col gap-2 mb-8 text-left"></div>
+            <button onclick="closeStreakModal()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black shadow-lg hover:brightness-110 transition-all uppercase tracking-widest">
+                ¡Brillante!
+            </button>
+        </div>
+    </div>
 
-            <!-- SELECTOR GIMNASIO -->
-            <div id="gym-day-selector" class="tab-content hidden text-center flex-grow">
-                <h4 class="font-black text-indigo-600 uppercase text-xs mb-4 italic">Registro Táctico</h4>
-                <div class="grid grid-cols-1 gap-2 mb-4" id="gym-routine-grid"></div>
-                <button onclick="setGymDay(6)" class="w-full py-4 bg-slate-100 text-slate-800 text-xs font-black uppercase border-2 border-indigo-600 rounded mb-3">🌊 Descanso (D)</button>
-                <button onclick="clearGymCheck()" class="w-full py-2 text-red-500 font-bold text-xs">Borrar Registro</button>
+    <!-- MODAL DE APOYO -->
+    <div id="mood-support-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-lg hidden z-[250] flex items-center justify-center p-4">
+        <div class="streak-alert bg-white w-full max-w-lg rounded-[2.5rem] p-10 shadow-2xl text-center border-b-8 border-pink-500">
+            <div class="text-7xl mb-4">🫂</div>
+            <h2 class="text-3xl font-black text-pink-600 mb-4 tracking-tight">Un momento de cuidado</h2>
+            <div class="space-y-4 text-slate-600 font-medium leading-relaxed text-left">
+                <p>Llevas 5 días con el ánimo bajo. Recuerda que la resiliencia incluye saber cuándo parar y cuidarse.</p>
+                <p>Hoy no te pedimos perfección. Granada y tus gatas te esperan para un descanso necesario.</p>
             </div>
-            
-            <div id="tab-profile" class="tab-content flex-grow">
-                <div class="flex flex-col gap-4">
-                    <input type="text" id="p-name" placeholder="Tu Nombre" class="border-b-2 border-slate-900 w-full p-2 font-black outline-none text-lg bg-transparent">
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="number" id="p-age" placeholder="Edad" class="border-b border-slate-200 p-2 text-sm">
-                        <input type="number" id="p-weight" placeholder="kg" class="border-b border-slate-200 p-2 text-sm">
-                    </div>
-                </div>
-            </div>
+            <button onclick="closeMoodSupportModal()" class="mt-8 w-full bg-pink-500 text-white py-4 rounded-2xl font-black shadow-lg hover:bg-pink-600 transition-all uppercase tracking-widest">
+                Entendido
+            </button>
+        </div>
+    </div>
 
-            <div id="tab-habits" class="tab-content hidden flex-grow">
-                <div id="habits-list-ui" class="max-h-40 overflow-y-auto border border-slate-100 rounded mb-4 text-xs"></div>
-                <div class="bg-indigo-50 p-3 rounded-lg">
-                    <input type="text" id="h-name" placeholder="Nuevo Hábito" class="border p-2 text-xs w-full rounded mb-2 uppercase font-bold">
-                    <input type="text" id="h-tip" placeholder="Leyenda / Explicación" class="border p-2 text-[10px] w-full rounded mb-2 outline-none">
-                    <button onclick="addHabitAction()" class="w-full py-2 bg-indigo-600 text-white rounded font-bold text-xs">Añadir</button>
-                </div>
+    <!-- MODAL DE ANÁLISIS -->
+    <div id="analysis-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-6xl rounded-[3rem] p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-8 px-2">
+                <h2 class="text-3xl font-bold text-slate-800" id="analysis-title">Análisis Conductual</h2>
+                <button onclick="closeAnalysis()" class="text-slate-400 hover:text-slate-600 text-3xl">✕</button>
             </div>
-
-            <div id="tab-meals" class="tab-content hidden text-center flex-grow">
-                <p class="text-xs font-black text-slate-400 uppercase mb-4 tracking-widest">Sugerencias Nutricionales</p>
-                <div class="grid grid-cols-2 gap-3">
-                    <button onclick="suggestMeal('Desayuno')" class="btn-option"><strong>☕ Desayuno Fit ✨</strong><span>Bajo en grasa</span></button>
-                    <button onclick="suggestMeal('Almuerzo')" class="btn-option"><strong>🥗 Almuerzo Fit ✨</strong><span>Alto en proteína</span></button>
-                    <button onclick="suggestMeal('Cena')" class="btn-option"><strong>🍲 Cena Fit ✨</strong><span>Rica en verduras</span></button>
-                    <button onclick="suggestMeal('Snack')" class="btn-option"><strong>🥜 Snack Fit ✨</strong><span>Ligero y sano</span></button>
-                    <button onclick="suggestMeal('Placer Culpable')" class="btn-option bg-rose-50 border-rose-200 col-span-2">
-                        <div class="flex justify-between items-center w-full">
-                            <strong>🍕 PLACER CULPABLE ✨</strong>
-                            <span class="text-[10px] text-rose-600 font-black">BURGERS, PIZZA, FRITOS...</span>
-                        </div>
-                    </button>
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <div class="stat-card"><span class="text-3xl mb-1">🏆</span><span class="text-2xl font-black text-indigo-600" id="stat-perfect-days">0</span><span class="text-[10px] uppercase font-bold text-slate-400">Días Perfectos</span></div>
+                <div class="stat-card"><span class="text-3xl mb-1">🧠</span><span class="text-2xl font-black text-emerald-500" id="stat-global-avg">0%</span><span class="text-[10px] uppercase font-bold text-slate-400">Adherencia</span></div>
+                <div class="stat-card"><span class="text-3xl mb-1">🌈</span><span class="text-2xl font-black text-pink-500" id="stat-avg-mood-label">Normal</span><span class="text-[10px] uppercase font-bold text-slate-400 text-center">Estado Medio</span></div>
+                <div class="stat-card"><span class="text-3xl mb-1">⭐</span><span class="text-2xl font-black text-amber-500" id="stat-total-stars">0</span><span class="text-[10px] uppercase font-bold text-slate-400">Estrellas</span></div>
             </div>
-
-            <div id="tab-workouts" class="tab-content hidden flex-grow">
-                <p class="text-[10px] font-black text-slate-400 uppercase mb-4 text-center tracking-widest italic">Split Semanal</p>
-                <div id="gym-editor-list" class="max-h-80 overflow-y-auto"></div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-slate-50 p-6 rounded-[2rem] border border-slate-100"><canvas id="habitsChart"></canvas></div>
+                <div class="bg-slate-50 p-6 rounded-[2rem] border border-slate-100"><canvas id="moodCorrelationChart"></canvas></div>
             </div>
-
-            <div id="tab-system" class="tab-content hidden text-center flex-grow">
-                <input type="password" id="api-key-input" class="border p-3 rounded w-full mb-6 font-mono text-xs" placeholder="API Key Gemini">
-                <button onclick="confirmReset()" class="w-full py-3 bg-red-600 text-white rounded font-bold text-xs">BORRAR TODOS LOS DATOS</button>
-            </div>
-
-            <div class="mt-auto flex justify-between items-center border-t pt-4" id="modal-footer">
-                <button onclick="closeModal()" class="text-xs font-black text-slate-400">VOLVER</button>
-                <button id="btn-save-all" onclick="saveAllSettings()" class="py-3 px-8 bg-slate-900 text-white rounded-lg font-black text-xs">GUARDAR TODO</button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div id="habits-detail-list" class="space-y-2"></div>
+                <div class="insight-box" id="neuro-insights-content"></div>
             </div>
         </div>
     </div>
 
-    <div id="toast-notification"></div>
+    <!-- Modal Ajustes -->
+    <div id="settings-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-3xl rounded-3xl p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <h2 class="text-2xl font-bold mb-6">Configuración del Perfil</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div><label class="block text-xs font-bold text-slate-400 uppercase mb-1">Nombre</label><input type="text" id="input-name" class="w-full p-2 border rounded-xl outline-none focus:ring-1 ring-indigo-500"></div>
+                <div><label class="block text-xs font-bold text-slate-400 uppercase mb-1">Edad</label><input type="number" id="input-age" class="w-full p-2 border rounded-xl outline-none focus:ring-1 ring-indigo-500"></div>
+                <div><label class="block text-xs font-bold text-slate-400 uppercase mb-1">Peso (kg)</label><input type="number" id="input-weight" class="w-full p-2 border rounded-xl outline-none focus:ring-1 ring-indigo-500"></div>
+            </div>
+            <div class="mb-8">
+                <label class="block text-xs font-bold text-slate-400 uppercase mb-3 tracking-widest text-center">💡 Sugerencias Rápidas</label>
+                <div class="flex flex-wrap gap-2 justify-center" id="suggestions-container"></div>
+            </div>
+            <div class="mb-8">
+                <h3 class="font-bold mb-4 flex justify-between items-center text-indigo-600">
+                    Mis Hábitos (Máx. 10)
+                    <button onclick="addHabitInput()" class="text-xs bg-indigo-600 text-white px-3 py-1 rounded-full">+ Añadir Nuevo</button>
+                </h3>
+                <div id="habits-list-config" class="space-y-2"></div>
+            </div>
+            <div class="border-t pt-6 mt-4">
+                <h3 class="text-sm font-bold text-slate-400 uppercase mb-3">Gestión de Copia de Seguridad</h3>
+                <div class="flex gap-2">
+                    <button onclick="importBackup()" class="flex-1 border-2 border-dashed border-slate-200 text-slate-500 py-3 rounded-xl hover:bg-slate-50 transition-all font-bold text-sm">📥 Importar .JSON</button>
+                    <button onclick="downloadBackup()" class="flex-1 bg-slate-100 text-slate-600 py-3 rounded-xl hover:bg-slate-200 transition-all font-bold text-sm">📤 Exportar Backup</button>
+                </div>
+                <input type="file" id="import-input" class="hidden" accept=".json" onchange="handleFileImport(event)">
+            </div>
+            <button onclick="saveSettings()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold shadow-lg hover:bg-indigo-700 transition-all mt-8">Guardar Cambios</button>
+        </div>
+    </div>
 
-    <script>
-        const apiKeyDefault = ""; 
-        const daysInMonth = 31;
-        const moodConfig = [{icon:'😐',label:'Normal'}, {icon:'🙂',label:'Bien'}, {icon:'😁',label:'Genial'}, {icon:'🤩',label:'Flow'}, {icon:'🙁',label:'Bajo'}, {icon:'😢',label:'Triste'}, {icon:'😭',label:'Muy Triste'}, {icon:'😫',label:'Estresado'}];
-        const routineLabels = { 1: "T1", 2: "E1", 3: "P", 4: "T2", 5: "E2", 6: "D" };
-        const nationalHolidays = [1, 6];
+    <!-- Modals Soporte -->
+    <div id="routine-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md hidden z-[70] flex items-center justify-center p-4"><div class="bg-white w-full max-w-2xl rounded-3xl p-8 shadow-2xl"><h2 class="text-2xl font-bold mb-6 text-center">Selecciona Rutina</h2><div id="routine-options" class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8"></div><button onclick="cancelRoutine()" class="w-full py-3 border rounded-2xl font-bold text-slate-500">Cancelar</button></div></div>
+    <div id="routine-settings-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden z-[80] flex items-center justify-center p-4"><div class="bg-white w-full max-w-xl rounded-3xl p-8 shadow-2xl max-h-[85vh] overflow-y-auto"><h2 class="text-2xl font-bold mb-6 text-slate-800">Editar Rutinas</h2><div id="routine-edit-list" class="space-y-4 mb-8"></div><button onclick="saveRoutineSettings()" class="w-full bg-indigo-600 text-white py-3 rounded-2xl font-bold shadow-lg">Guardar</button></div></div>
+    <div id="legend-modal" class="fixed inset-0 bg-slate-900/40 hidden z-[60] flex items-center justify-center p-4"><div class="bg-white w-full max-w-sm rounded-2xl p-6 text-center shadow-2xl border-t-4 border-indigo-500"><h3 id="legend-title" class="text-xl font-bold mb-2"></h3><p id="legend-desc" class="italic mb-6 text-slate-600"></p><button onclick="closeLegend()" class="w-full bg-indigo-600 text-white py-2 rounded-xl font-bold">Cerrar</button></div></div>
+    
+    <!-- Modal Leyenda Mood -->
+    <div id="mood-legend-modal" class="fixed inset-0 bg-slate-900/40 hidden z-[60] flex items-center justify-center p-4"><div class="bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl border-t-4 border-indigo-500"><h3 class="text-xl font-bold text-indigo-700 mb-4 text-center">Leyenda de Mood</h3><div id="mood-legend-list" class="space-y-3 mb-6"></div><button onclick="closeMoodLegend()" class="w-full bg-indigo-600 text-white py-2 rounded-xl font-bold">Cerrar</button></div></div>
+    
+    <div id="mood-picker" class="fixed hidden z-[100] bg-white border shadow-2xl rounded-2xl p-3 grid grid-cols-4 gap-3 min-w-[280px]"></div>
 
-        let habitsConfig = [];
-        let profileData = {name:'', age:'', height:'183', weight: '84', avatar:'fa-brain'};
-        let myRoutines = [];
-        let trackerBody, trackerHead;
-        let activeGymDayOfMonth = null;
-
-        const playSfx = (f,t,d,v) => { try{ const ac=new(window.AudioContext||window.webkitAudioContext)(); const o=ac.createOscillator(); const g=ac.createGain(); o.type=t; o.frequency.setValueAtTime(f,ac.currentTime); g.gain.setValueAtTime(v,ac.currentTime); g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+d); o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime+d+0.1); }catch(e){} };
-        const playPop=()=>playSfx(400,'sine',0.1,0.1); 
-        const playVictory=()=>{ [523,659,783,1046,1318].forEach((f,i)=>setTimeout(()=>playSfx(f,'sine',0.8,0.1),i*100)); };
-
-        // --- GEMINI API INTEGRATION ---
-        async function callGemini(prompt, systemPrompt) {
-            const userKey = localStorage.getItem('gemini_api_key') || apiKeyDefault;
-            const apiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${userKey}`;
-            const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] }
-            };
-            const maxRetries = 5;
-            for (let i = 0; i < maxRetries; i++) {
-                try {
-                    const response = await fetch(apiEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                    if (response.ok) { const result = await response.json(); return result.candidates?.[0]?.content?.parts?.[0]?.text; }
-                } catch (error) {
-                    const delay = Math.pow(2, i) * 1000;
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                }
-            }
-            throw new Error("API Offline");
-        }
-
-        async function displayIA(text) {
-            const iaBox = document.getElementById('ia-result');
-            const iaContent = document.getElementById('ia-content');
-            iaBox.classList.remove('hidden');
-            iaContent.innerHTML = text.replace(/\n/g, '<br>');
-        }
-
-        async function suggestMeal(type) {
-            displayIA('<div class="loading-ia"><i class="fas fa-utensils fa-spin"></i> Consultando al Neuro-Chef para Granada...</div>');
-            const todayDay = new Date().getDate();
-            const moodEmoji = document.getElementById(`mood-row-${todayDay}`)?.innerText || "😐";
-            
-            let constraints = (type === "Placer Culpable") 
-                ? "Regla: Es un capricho. Puede incluir Pizzas, Hamburguesas, Fritos." 
-                : "Regla Estricta: Alimentación Fit. Baja en grasa, rica en proteínas, con abundantes verduras frescas.";
-
-            const prompt = `Usuario: ${profileData.name}, 38 años, 84kg, 183cm. Ubicación: Granada. Tipo: ${type}. Mood actual: ${moodEmoji}. Ingredientes: Mercadona. ${constraints} Sé breve.`;
-
-            try { 
-                const res = await callGemini(prompt, "Eres un Chef especializado en neuro-gastronomía."); 
-                displayIA(res); 
-            } catch (err) { 
-                displayIA("⚠️ Error al conectar con el Chef IA."); 
-            }
-        }
-
-        // --- CORE LOGIC ---
-        function init() {
-            trackerBody = document.getElementById('tracker-body');
-            trackerHead = document.getElementById('tracker-head');
-            loadConfig(); renderHabitsUI(); renderRightPage(); updateProfileDisplay(); renderGymRoutinesUI();
-            setTimeout(checkMoodAlert, 1500);
-            setTimeout(checkInactivityAlerts, 2000);
-        }
-
-        function renderRightPage() {
-            if (!trackerHead || !trackerBody) return;
-            trackerHead.innerHTML = `<tr><th class="day-col">#</th><th class="mood-col">MOOD</th>${habitsConfig.map(h => `<th><i class="fas ${h.icon}"></i><br>${h.name}</th>`).join('')}<th class="trophy-col">🏆</th></tr>`;
-            trackerBody.innerHTML = '';
-            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
-            const habitChecksSoFar = {}; habitsConfig.forEach(h => habitChecksSoFar[h.id] = 0);
-            let totalPerfectDays = 0;
-
-            for(let i=1; i<=daysInMonth; i++) {
-                const tr = document.createElement('tr'); tr.id = `row-${i}`;
-                const date = new Date(2026, 0, i);
-                if(date.getDay()===0||date.getDay()===6) tr.classList.add('weekend-row');
-                if(nationalHolidays.includes(i)) tr.classList.add('holiday-row');
-                
-                let html = `<td class="day-col">${i}</td>`;
-                const currentMood = saved.moods ? saved.moods[i] : null;
-                let moodHtml = currentMood ? `<span class="mood-emoji">${currentMood}</span><span class="mood-label">${moodConfig.find(m=>m.icon===currentMood)?.label || ''}</span>` : `·`;
-                html += `<td class="mood-col" id="mood-row-${i}" onclick="cycleMood(${i})"><div class="mood-selector">${moodHtml}</div></td>`;
-
-                let rowIsComplete = true; let habitsMarkedCount = 0;
-                habitsConfig.forEach(h => {
-                    const checkValue = saved.habits && saved.habits[`${i}-${h.id}`];
-                    const isDone = !!checkValue;
-                    if (isDone) { habitChecksSoFar[h.id]++; habitsMarkedCount++; } else { rowIsComplete = false; }
-                    let streak = 0; if (isDone) { for (let d = i; d > 0; d--) { if (saved.habits && saved.habits[`${d}-${h.id}`]) streak++; else break; } }
-                    const isStreakMilestone = isDone && streak > 0 && streak % 7 === 0;
-                    const metalClass = getMetalClass(habitChecksSoFar[h.id]);
-                    const isGym = h.id.toLowerCase().includes('gym') || h.icon.includes('dumbbell');
-                    const routineValue = (isGym && isDone && typeof checkValue === 'number') ? checkValue : null;
-
-                    html += `<td class="tracker-cell ${metalClass} ${isDone?'completed':''} ${isGym?'gym-check':''} ${isStreakMilestone?'streak-7':''}" data-routine-label="${routineValue ? routineLabels[routineValue] : ''}" data-day="${i}" data-habit="${h.id}" onclick="toggleCell(this, '${h.id}', ${i}, '${h.icon}')"></td>`;
+    <script id="main-script">
+        // --- MOTOR DE AUDIO ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            if (type === 'check') {
+                osc.type = 'sine'; osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+            } else if (type === 'uncheck') {
+                osc.type = 'sine'; osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(220, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+            } else if (type === 'mood') {
+                osc.type = 'sine'; osc.frequency.setValueAtTime(329, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.2);
+            } else if (type === 'support') {
+                osc.type = 'sine'; osc.frequency.setValueAtTime(261, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.8);
+            } else if (type === 'victory') {
+                [523.25, 659.25, 783.99, 1046.50].forEach((f, i) => {
+                    const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                    o.connect(g); g.connect(audioCtx.destination); o.type = 'triangle';
+                    o.frequency.setValueAtTime(f, audioCtx.currentTime + (i * 0.1));
+                    g.gain.setValueAtTime(0.1, audioCtx.currentTime + (i * 0.1));
+                    g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + (i * 0.1) + 0.5);
+                    o.start(audioCtx.currentTime + (i * 0.1)); o.stop(audioCtx.currentTime + (i * 0.1) + 0.5);
                 });
-                
-                let trophyHtml = '';
-                if (rowIsComplete && habitsConfig.length > 0) {
-                    totalPerfectDays++;
-                    trophyHtml = `<span class="trophy-display ${getTrophyClass(totalPerfectDays)}">🏆</span>`;
-                    tr.classList.add('row-full-complete');
-                } else if (habitsMarkedCount > 0) {
-                    trophyHtml = `<span class="trophy-display medal-display text-amber-800 opacity-20">🏅</span>`;
-                }
-                html += `<td class="trophy-col">${trophyHtml}</td>`;
-                tr.innerHTML = html; trackerBody.appendChild(tr);
             }
         }
 
-        function toggleCell(cell, hId, day, hIcon) {
-            const isGym = hId.toLowerCase().includes('gym') || hIcon.includes('dumbbell');
-            if (isGym) {
-                activeGymDayOfMonth = day;
-                document.getElementById('main-modal').classList.remove('hidden');
-                document.getElementById('modal-tabs-header').classList.add('hidden');
-                document.getElementById('btn-save-all').classList.add('hidden');
-                switchTab('gym-day-selector');
-            } else {
-                cell.classList.toggle('completed');
-                const isNowCompleted = cell.classList.contains('completed');
-                if(isNowCompleted) { playSfx(600, 'triangle', 0.1, 0.05); checkStreakCongratulation(hId, day); } 
-                else playSfx(140, 'triangle', 0.15, 0.15);
-                saveMatrixState(); renderRightPage();
-                const row = document.getElementById(`row-${day}`);
-                if(row && row.classList.contains('row-full-complete') && isNowCompleted) playVictory();
+        const MOODS = [{icon:'😐',label:'Normal',val:5},{icon:'🙂',label:'Bien',val:6},{icon:'😊',label:'Muy bien',val:7},{icon:'🤩',label:'Flow',val:8},{icon:'😕',label:'Bajo',val:4},{icon:'😢',label:'Triste',val:3},{icon:'😭',label:'Muy triste',val:2},{icon:'😫',label:'Estresado',val:1}];
+        const DEFAULT_ROUTINES = [{id:'E1', name:'Empuje 1', desc:'Pecho, Hombro, Tríceps.'},{id:'E2', name:'Empuje 2', desc:'Hombro pesado, Pecho incl.'},{id:'T1', name:'Tiro 1', desc:'Espalda, Bíceps.'},{id:'T2', name:'Tiro 2', desc:'Espalda (Grosor), Bíceps.'},{id:'P', name:'Pierna', desc:'Sentadilla, Prensa.'},{id:'D', name:'Descanso', desc:'Recuperación activa.'}];
+        const SUGGESTED_HABITS = [{name: 'Beber 2L Agua', desc: 'Hidratación óptima.'},{name: 'Max 2 Cafés', desc: 'Control de cafeína.'},{name: 'Llamar Queridos', desc: 'Refuerzo social.'},{name: 'Tiempo con Gatas', desc: 'Reducción de estrés.'},{name: 'Practicar Piano', desc: 'Estimulación motora.'},{name: 'Lectura 30 min', desc: 'Reserva cognitiva.'},{name: 'Paseo/Senderismo', desc: 'Sierra de Granada.'}];
+        const HOLIDAYS = [{m:0, d:1}, {m:0, d:6}, {m:1, d:28}, {m:4, d:1}, {m:7, d:15}, {m:9, d:12}, {m:10, d:1}, {m:11, d:6}, {m:11, d:8}, {m:11, d:25}];
+
+        // --- ESTADO ---
+        let state = {
+            profile: { name: 'Neuro Usuario', age: 38, weight: 84 },
+            habits: [{id:'1', name:'Gimnasio', desc:'Entrenamiento programado'},{id:'2', name:'Tocar Piano', desc:'Práctica diaria'},{id:'3', name:'Lectura', desc:'20 páginas'},{id:'4', name:'Sierra/Senderismo', desc:'Ruta por la Sierra'}],
+            routines: JSON.parse(JSON.stringify(DEFAULT_ROUTINES)),
+            monthlyData: {} 
+        };
+
+        const todayInit = new Date();
+        let displayMonth = todayInit.getMonth();
+        let displayYear = todayInit.getFullYear();
+        let habitsChart, correlationChart, currentGymDay;
+
+        function getMonthKey() { return `${displayYear}-${displayMonth}`; }
+        function getCurrentMonthData() {
+            const key = getMonthKey();
+            if (!state.monthlyData[key]) state.monthlyData[key] = { history: {}, moods: {}, gymLogs: {}, celebratedStreaks: {} };
+            if (!state.monthlyData[key].celebratedStreaks) state.monthlyData[key].celebratedStreaks = {};
+            return state.monthlyData[key];
+        }
+
+        function getTierInfo(count) {
+            if (count <= 7) return 'tier-bronze';
+            if (count <= 14) return 'tier-silver';
+            if (count <= 21) return 'tier-gold';
+            return 'tier-platinum';
+        }
+
+        function exportFullHTML() {
+            let currentHTML = document.documentElement.outerHTML;
+            const dataToInject = `<script>const injectedState = ${JSON.stringify(state)}; window.onload = () => { state = injectedState; renderAll(); }; <\/script>`;
+            currentHTML = currentHTML.replace('</body>', dataToInject + '</body>');
+            const blob = new Blob([currentHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = `NeuroHabit_FullApp_${displayYear}_${displayMonth+1}.html`;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+        }
+
+        function changeMonth(dir) { displayMonth += dir; if(displayMonth > 11) { displayMonth = 0; displayYear++; } if(displayMonth < 0) { displayMonth = 11; displayYear--; } renderAll(); }
+
+        function renderAll() {
+            document.getElementById('profile-summary').innerText = `${state.profile.name} • ${state.profile.age} años • ${state.profile.weight} kg`;
+            const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+            document.getElementById('current-month-name').innerText = `${monthNames[displayMonth]} ${displayYear}`;
+            const data = getCurrentMonthData();
+            const dInMonth = new Date(displayYear, displayMonth + 1, 0).getDate();
+            const header = document.getElementById('matrix-header');
+            header.innerHTML = `<th class="sticky-col p-4 text-slate-400 uppercase text-[10px]">Día</th><th class="p-4 text-slate-400 uppercase text-[10px] text-center">Mood <button onclick="showMoodLegend()" class="ml-1 text-indigo-400">ⓘ</button></th>`;
+            state.habits.forEach(h => { header.innerHTML += `<th class="p-4 text-center text-slate-700 font-bold text-sm min-w-[120px] tooltip" onclick="showLegend('${h.id}')" data-description="${h.desc}">${h.name}</th>`; });
+            header.innerHTML += `<th class="p-4 text-slate-400 uppercase text-[10px] text-center">Logro</th>`;
+            const body = document.getElementById('matrix-body'); body.innerHTML = '';
+            const weekDays = ['D', 'L', 'M', 'X', 'J', 'V', 'S'];
+            for (let d = 1; d <= dInMonth; d++) {
+                const dateObj = new Date(displayYear, displayMonth, d);
+                const dayW = dateObj.getDay();
+                const isWE = (dayW === 0 || dayW === 6);
+                const isH = HOLIDAYS.some(h => h.m === displayMonth && h.d === d);
+                const row = document.createElement('tr');
+                row.className = `border-b border-slate-50 hover:bg-slate-50/50 transition-colors ${isWE ? 'weekend-row' : ''} ${isH ? 'holiday-row' : ''}`;
+                const curM = data.moods[d];
+                const moodLabel = curM ? MOODS.find(m => m.icon === curM)?.label : '';
+                row.innerHTML = `<td class="sticky-col p-3 text-slate-500 font-bold text-xs"><div class="flex flex-col"><span>${d}</span><span class="text-[9px] opacity-60">${weekDays[dayW]}</span></div></td>`;
+                row.innerHTML += `<td class="p-2 text-center"><div class="mood-cell ${curM ? 'tooltip' : ''}" onclick="openMoodPicker(this, ${d})" ${curM ? `data-description="${moodLabel}"` : ''}>${curM || '●'}</div></td>`;
+                let checkedT = 0;
+                state.habits.forEach(h => {
+                    const isC = (data.history[h.id] || []).includes(d);
+                    if (isC) checkedT++;
+                    const cnt = (data.history[h.id] || []).length;
+                    const isG = h.name.toLowerCase().includes('gimnasio');
+                    let content = isC ? '⭐' : '';
+                    if (isG && isC && data.gymLogs[d]) content = `⭐ <span class="routine-tag">${data.gymLogs[d]}</span>`;
+                    row.innerHTML += `<td class="p-2"><div class="habit-cell ${isC ? 'checked ' + getTierInfo(cnt) : ''}" onclick="toggleDay('${h.id}', ${d})">${content}</div></td>`;
+                });
+                let achv = (checkedT === state.habits.length) ? '🏆' : (checkedT > 0 ? `🏅 <span class="text-[10px] font-bold text-slate-400 align-middle">${checkedT}</span>` : '');
+                row.innerHTML += `<td class="p-2 text-center text-xl min-w-[60px]"><span class="${achv ? 'reward-animate' : ''} block">${achv}</span></td>`;
+                body.appendChild(row);
             }
         }
 
-        function setGymDay(dayIndex) {
-            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
-            saved.habits = saved.habits || {};
-            const gymHabit = habitsConfig.find(h => h.id.toLowerCase().includes('gym') || h.icon.includes('dumbbell'));
-            if(!gymHabit) return;
-            saved.habits[`${activeGymDayOfMonth}-${gymHabit.id}`] = dayIndex;
-            localStorage.setItem('planner_data_v104_1', JSON.stringify(saved));
-            playSfx(600, 'triangle', 0.1, 0.05);
-            closeModal(); renderRightPage();
-            const row = document.getElementById(`row-${activeGymDayOfMonth}`);
-            if(row && row.classList.contains('row-full-complete')) playVictory();
-        }
-
-        function clearGymCheck() {
-            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
-            const gymHabit = habitsConfig.find(h => h.id.toLowerCase().includes('gym') || h.icon.includes('dumbbell'));
-            if(gymHabit && saved.habits) delete saved.habits[`${activeGymDayOfMonth}-${gymHabit.id}`];
-            localStorage.setItem('planner_data_v104_1', JSON.stringify(saved));
-            closeModal(); renderRightPage();
-        }
-
-        function cycleMood(day) {
-            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
-            saved.moods = saved.moods || {};
-            const current = saved.moods[day] || '😐';
-            const idx = moodConfig.findIndex(m => m.icon === current);
-            saved.moods[day] = moodConfig[(idx + 1) % moodConfig.length].icon;
-            localStorage.setItem('planner_data_v104_1', JSON.stringify(saved));
-            playPop(); renderRightPage(); checkMoodAlert();
-        }
-
-        function checkMoodAlert() {
-            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
-            const moods = saved.moods || {};
-            const negativeIcons = ['🙁', '😢', '😭', '😫']; 
-            const alertLog = JSON.parse(localStorage.getItem('planner_mood_alert_v104_1') || '{}');
-            alertLog.notifiedStreaks = alertLog.notifiedStreaks || [];
-            for (let i = 4; i <= daysInMonth; i++) {
-                let negativeStreakCount = 0;
-                for (let j = 0; j < 4; j++) { if (moods[i-j] && negativeIcons.includes(moods[i-j])) negativeStreakCount++; else break; }
-                if (negativeStreakCount === 4 && !alertLog.notifiedStreaks.includes(i)) {
-                    setTimeout(() => { showToast("Llevas unos días de ánimo bajo. Prioriza el descanso. ¡Mucho ánimo!", "alert"); playSfx(300, 'sine', 0.8, 0.1); }, 1000);
-                    alertLog.notifiedStreaks.push(i); localStorage.setItem('planner_mood_alert_v104_1', JSON.stringify(alertLog));
-                    return;
+        // --- RACHAS ---
+        function checkStreaksCelebration(day) {
+            const data = getCurrentMonthData();
+            const habitsReached = [];
+            let monthComplete = false;
+            const dMonth = new Date(displayYear, displayMonth + 1, 0).getDate();
+            state.habits.forEach(habit => {
+                const hist = (data.history[habit.id] || []).sort((a,b) => a - b);
+                let currentS = 0;
+                for (let i = 0; i < 31; i++) { if (hist.includes(day - i)) currentS++; else break; }
+                const ms = [7, 14, 21, 28];
+                if (ms.includes(currentS)) {
+                    if (!data.celebratedStreaks[habit.id]) data.celebratedStreaks[habit.id] = [];
+                    if (!data.celebratedStreaks[habit.id].includes(currentS)) {
+                        habitsReached.push({ name: habit.name, streak: currentS });
+                        data.celebratedStreaks[habit.id].push(currentS);
+                    }
                 }
-            }
-        }
-
-        function checkInactivityAlerts() {
-            const todayDay = new Date().getDate();
-            if (![7, 14, 21, 28, 31].includes(todayDay)) return;
-            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
-            const alertLog = JSON.parse(localStorage.getItem('planner_alerts_v104_1') || '{}');
-            if (alertLog.lastDate === todayDay) return;
-            
-            let alertsShown = 0;
-            habitsConfig.forEach(h => {
-                let empty = 0;
-                for (let d = todayDay - 6; d <= todayDay; d++) if (d > 0 && !saved.habits[`${d}-${h.id}`]) empty++;
-                if (empty >= 5) {
-                     setTimeout(() => { showToast(`Esta semana no has hecho ${h.name}, aún estás a tiempo. ¡Ánimo!`, "alert"); }, alertsShown * 4000);
-                     alertsShown++;
-                }
-            });
-            if (alertsShown > 0) { alertLog.lastDate = todayDay; localStorage.setItem('planner_alerts_v104_1', JSON.stringify(alertLog)); }
-        }
-
-        function checkStreakCongratulation(hId, day) {
-            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
-            let streak = 0; for (let d = day; d > 0; d--) if (saved.habits && saved.habits[`${d}-${hId}`]) streak++; else break;
-            if (streak === 7) showToast(`¡Racha de 7 días en ${hId.toUpperCase()}!`, "success");
-        }
-
-        function saveMatrixState() {
-            const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}');
-            const habits = saved.habits || {};
-            habitsConfig.forEach(h => {
-                if (!(h.id.toLowerCase().includes('gym'))) {
-                    for (let i = 1; i <= daysInMonth; i++) {
-                        const cell = document.querySelector(`.tracker-cell[data-day="${i}"][data-habit="${h.id}"]`);
-                        if (cell && cell.classList.contains('completed')) habits[`${i}-${h.id}`] = true;
-                        else if (cell) delete habits[`${i}-${h.id}`];
+                if (day === dMonth && hist.length === dMonth) {
+                    if (!data.celebratedStreaks[habit.id]?.includes(99)) {
+                        monthComplete = true;
+                        if (!data.celebratedStreaks[habit.id]) data.celebratedStreaks[habit.id] = [];
+                        data.celebratedStreaks[habit.id].push(99);
                     }
                 }
             });
-            saved.habits = habits; localStorage.setItem('planner_data_v104_1', JSON.stringify(saved));
+            if (monthComplete) showFinalMonthCelebration();
+            else if (habitsReached.length > 0) showStreakCelebration(habitsReached);
         }
 
-        function loadConfig() {
-            habitsConfig = JSON.parse(localStorage.getItem('planner_config_v104_1')) || [
-                {id:'piano',name:'Piano',icon:'fa-music', tip:'Practicar 30 min'},
-                {id:'gym',name:'Gym',icon:'fa-dumbbell', tip:'Rutina split'},
-                {id:'leer',name:'Lectura',icon:'fa-book', tip:'15 min lectura'}
-            ];
-            profileData = JSON.parse(localStorage.getItem('planner_profile_v104_1')) || {name:'Neuropsicólogo', age:'38', height:'183', weight:'84', avatar:'fa-brain'};
-            myRoutines = JSON.parse(localStorage.getItem('planner_routines_v104_1')) || [{ id: 1, name: "Tirón 1", exercises: "Remo" }, { id: 2, name: "Empuje 1", exercises: "Press" }, { id: 3, name: "Pierna", exercises: "Sentadilla" }, { id: 4, name: "Tirón 2", exercises: "Dominadas" }, { id: 5, name: "Empuje 2", exercises: "Militar" }];
+        function checkMoodSupport(day) {
+            const moods = getCurrentMonthData().moods;
+            let lowS = 0;
+            for (let i = 0; i < 5; i++) {
+                const dIdx = day - i; if(dIdx < 1) break;
+                const mObj = MOODS.find(m => m.icon === moods[dIdx]);
+                if (mObj && mObj.val <= 4) lowS++; else break;
+            }
+            if (lowS === 5) showMoodSupportModal();
         }
 
-        function saveAllSettings() {
-            localStorage.setItem('gemini_api_key', document.getElementById('api-key-input').value.trim());
-            profileData.name = document.getElementById('p-name').value;
-            profileData.age = document.getElementById('p-age').value;
-            profileData.weight = document.getElementById('p-weight').value;
-            localStorage.setItem('planner_profile_v104_1', JSON.stringify(profileData));
-            localStorage.setItem('planner_config_v104_1', JSON.stringify(habitsConfig));
-            localStorage.setItem('planner_routines_v104_1', JSON.stringify(myRoutines));
-            saveMatrixState(); closeModal(); init();
+        function showStreakCelebration(ms) {
+            const modal = document.getElementById('streak-modal'); const list = document.getElementById('streak-habits-list'); list.innerHTML = '';
+            ms.forEach(m => { list.innerHTML += `<div class="bg-slate-50 p-4 rounded-2xl border flex justify-between font-bold mb-2"><span>${m.name}</span><span class="text-indigo-600">${m.streak} DÍAS</span></div>`; });
+            modal.classList.remove('hidden'); playSound('victory');
+        }
+        function showFinalMonthCelebration() { document.getElementById('streak-modal').classList.remove('hidden'); document.getElementById('streak-icon').innerText = '👑'; document.getElementById('streak-title').innerText = '¡MAESTRÍA TOTAL!'; playSound('victory'); }
+        function showMoodSupportModal() { document.getElementById('mood-support-modal').classList.remove('hidden'); playSound('support'); }
+        function closeMoodSupportModal() { document.getElementById('mood-support-modal').classList.add('hidden'); }
+        function closeStreakModal() { document.getElementById('streak-modal').classList.add('hidden'); }
+
+        // --- HANDLERS ---
+        function toggleDay(id, d) {
+            const data = getCurrentMonthData();
+            const h = state.habits.find(x => String(x.id) === String(id));
+            const isG = h.name.toLowerCase().includes('gimnasio');
+            if (!data.history[id]) data.history[id] = [];
+            const idx = data.history[id].indexOf(d);
+            if (idx > -1) { data.history[id].splice(idx, 1); if(isG) delete data.gymLogs[d]; playSound('uncheck'); } 
+            else { if(isG) { currentGymDay = d; openRoutinePicker(); return; } completeCheck(id, d); }
+            saveState(); renderAll();
+        }
+        function completeCheck(id, d) {
+            const data = getCurrentMonthData();
+            if (!data.history[id]) data.history[id] = [];
+            data.history[id].push(d); playSound('check');
+            if (state.habits.every(h => (data.history[h.id] || []).includes(d))) setTimeout(() => playSound('victory'), 400);
+            checkStreaksCelebration(d); saveState(); renderAll();
+        }
+        
+        // --- FIXED MOOD PICKER ---
+        function openMoodPicker(element, d) {
+            const p = document.getElementById('mood-picker'); 
+            p.innerHTML = '';
+            MOODS.forEach(m => { 
+                const b = document.createElement('button'); 
+                b.className = "flex flex-col items-center gap-1 p-2 hover:bg-indigo-50 rounded-xl transition-all"; 
+                b.innerHTML = `<span class="text-2xl">${m.icon}</span><span class="text-[9px] font-bold text-slate-400 uppercase text-center">${m.label}</span>`; 
+                b.onclick = () => { 
+                    getCurrentMonthData().moods[d] = m.icon; 
+                    playSound('mood'); 
+                    checkMoodSupport(d); 
+                    saveState(); 
+                    renderAll(); 
+                    p.classList.add('hidden'); 
+                }; 
+                p.appendChild(b); 
+            });
+            
+            const rect = element.getBoundingClientRect(); 
+            // Better positioning relative to viewport
+            let topPos = rect.bottom + window.scrollY + 5;
+            let leftPos = rect.left + window.scrollX - 100;
+            
+            // Adjust if goes off screen
+            if (leftPos < 10) leftPos = 10;
+            
+            p.style.top = `${topPos}px`; 
+            p.style.left = `${leftPos}px`; 
+            p.classList.remove('hidden');
+            
+            const c = (ev) => { 
+                if (!p.contains(ev.target) && ev.target !== element && !element.contains(ev.target)) { 
+                    p.classList.add('hidden'); 
+                    document.removeEventListener('click', c); 
+                }
+            };
+            setTimeout(() => document.addEventListener('click', c), 10);
         }
 
-        function openSettings(tab) { document.getElementById('main-modal').classList.remove('hidden'); switchTab(tab || 'tab-profile'); }
-        function openMealSelector() { document.getElementById('main-modal').classList.remove('hidden'); switchTab('tab-meals'); }
-        function openWorkoutSelector() { document.getElementById('main-modal').classList.remove('hidden'); switchTab('tab-workouts'); }
-        function closeModal() { document.getElementById('main-modal').classList.add('hidden'); document.getElementById('modal-tabs-header').classList.remove('hidden'); document.getElementById('btn-save-all').classList.remove('hidden'); }
-        function switchTab(id, isAgent = false) {
-            document.querySelectorAll('.tab-content, #ia-result').forEach(x => x.classList.add('hidden'));
-            const t = document.getElementById(id); if(t) t.classList.remove('hidden');
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            const btn = document.getElementById('btn-'+id); if(btn) btn.classList.add('active');
-            if (id === 'gym-day-selector') { document.getElementById('modal-tabs-header').classList.add('hidden'); document.getElementById('btn-save-all').classList.add('hidden'); }
-            else { document.getElementById('modal-tabs-header').classList.remove('hidden'); document.getElementById('btn-save-all').classList.remove('hidden'); }
+        // --- LEYENDAS ---
+        function showMoodLegend() {
+            const m = document.getElementById('mood-legend-modal'); const l = document.getElementById('mood-legend-list'); l.innerHTML = '';
+            MOODS.forEach(md => { l.innerHTML += `<div class="flex items-center gap-4 p-2 bg-slate-50 rounded-xl"><span class="text-2xl">${md.icon}</span><span class="font-bold text-slate-700">${md.label}</span></div>`; });
+            m.classList.remove('hidden');
         }
-        function renderGymRoutinesUI() {
-            document.getElementById('gym-editor-list').innerHTML = myRoutines.map((r, idx) => `<div class="mb-4 bg-slate-50 p-3 rounded-lg"><input type="text" value="${r.name}" onchange="updateRoutineData(${idx}, 'name', this.value)" class="border-b font-bold w-full mb-1 outline-none text-xs"><textarea rows="2" onchange="updateRoutineData(${idx}, 'exercises', this.value)" class="text-[10px] w-full bg-transparent">${r.exercises}</textarea></div>`).join('');
-            document.getElementById('gym-routine-grid').innerHTML = myRoutines.map(r => `<button onclick="setGymDay(${r.id})" class="btn-option"><strong>Día ${r.id}: ${r.name}</strong></button>`).join('');
-        }
-        function updateRoutineData(index, field, value) { myRoutines[index][field] = value; }
-        function showToast(m, mode = "") { const t=document.getElementById('toast-notification'); t.innerText=m; t.classList.remove('alert-mode', 'success-mode'); if(mode) t.classList.add(mode+'-mode'); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),6000); }
-        function getMetalClass(count) { if (count <= 7) return 'bronze-mark'; if (count <= 14) return 'silver-mark'; if (count <= 21) return 'gold-mark'; return 'super-gold-mark'; }
-        function getTrophyClass(count) { if (count <= 7) return 'trophy-gold'; if (count <= 14) return 'trophy-silver'; if (count <= 21) return 'trophy-gold'; return 'trophy-super'; }
-        function downloadHTML() { document.querySelectorAll('input, textarea').forEach(i => i.setAttribute('value', i.value)); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(["<!DOCTYPE html>\n"+document.documentElement.outerHTML], {type:'text/html'})); a.download = 'Habitos_Atomicos_v104_2.html'; a.click(); }
-        function exportCSV() { let csv = "Día,Mood"; habitsConfig.forEach(h=>csv+=`,${h.name}`); csv+="\n"; const saved = JSON.parse(localStorage.getItem('planner_data_v104_1') || '{}'); for (let i = 1; i <= daysInMonth; i++) { csv += `${i},${saved.moods ? saved.moods[i] : ''}`; habitsConfig.forEach(h=>csv+=`,${saved.habits&&saved.habits[i+'-'+h.id]?1:0}`); csv+="\n"; } const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' }); const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = `Habitos_v104.csv`; link.click(); }
-        function confirmReset() { if(confirm("¿BORRAR TODO?")) { localStorage.clear(); location.reload(); } }
-        function renderHabitsUI() { document.getElementById('habits-list-ui').innerHTML = habitsConfig.map((h,i) => `<div class="flex justify-between items-center bg-white p-2 mb-1 border-b rounded"><span>${h.name}</span><button onclick="remHabit(${i})" class="text-red-400 font-bold px-2">✕</button></div>`).join(''); }
-        function addHabitAction() { const n = document.getElementById('h-name').value.toUpperCase().trim(); const t = document.getElementById('h-tip').value.trim(); if(!n) return; habitsConfig.push({id: n.toLowerCase().replace(/\s/g,''), name: n, icon: 'fa-star', tip: t}); renderHabitsUI(); }
-        function remHabit(i) { habitsConfig.splice(i,1); renderHabitsUI(); }
-        function updateProfileDisplay() { 
-            const nameEl = document.getElementById('display-name');
-            if (nameEl) nameEl.innerText = profileData.name || "Enero 2026"; 
+        function closeMoodLegend() { document.getElementById('mood-legend-modal').classList.add('hidden'); }
+        function showLegend(id) { const h = state.habits.find(x => String(x.id) === String(id)); document.getElementById('legend-title').innerText = h.name; document.getElementById('legend-desc').innerText = h.desc || "Sin descripción."; document.getElementById('legend-modal').classList.remove('hidden'); }
+        function closeLegend() { document.getElementById('legend-modal').classList.add('hidden'); }
+
+        // --- ANÁLISIS ---
+        function openAnalysis() { document.getElementById('analysis-modal').classList.remove('hidden'); calculateStats(); }
+        function closeAnalysis() { document.getElementById('analysis-modal').classList.add('hidden'); }
+        function calculateStats() {
+            const data = getCurrentMonthData(); const dMonth = new Date(displayYear, displayMonth + 1, 0).getDate();
+            const ids = state.habits.map(h => String(h.id));
+            let pd = 0, ts = 0, mv = []; let dp = [];
+            for (let d = 1; d <= dMonth; d++) {
+                let daily = 0; ids.forEach(id => { if((data.history[id] || []).includes(d)) { daily++; ts++; } });
+                const perc = (daily / ids.length) * 100;
+                const m = MOODS.find(mo => mo.icon === data.moods[d]);
+                if(m) { mv.push(m.val); dp.push({ x: m.val, y: perc }); }
+                if (daily === ids.length) pd++;
+            }
+            document.getElementById('analysis-title').innerText = `Análisis: ${["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"][displayMonth]}`;
+            document.getElementById('stat-perfect-days').innerText = pd;
+            document.getElementById('stat-total-stars').innerText = ts;
+            const adh = Math.round((ts / (ids.length * dMonth)) * 100) || 0;
+            document.getElementById('stat-global-avg').innerText = adh + '%';
+            const avgM = mv.length ? Math.round(mv.reduce((a,b)=>a+b)/mv.length) : 5;
+            document.getElementById('stat-avg-mood-label').innerText = MOODS.find(m => m.val === avgM)?.label || 'Normal';
+            if (habitsChart) habitsChart.destroy();
+            habitsChart = new Chart(document.getElementById('habitsChart'), { type: 'bar', data: { labels: state.habits.map(h=>h.name), datasets: [{ data: state.habits.map(h=>Math.round(((data.history[h.id]||[]).length/dMonth)*100)), backgroundColor: '#6366f1', borderRadius: 8 }] }, options: { plugins: { legend: { display: false } } } });
+            if (correlationChart) correlationChart.destroy();
+            correlationChart = new Chart(document.getElementById('moodCorrelationChart'), { type: 'scatter', data: { datasets: [{ label: 'Días', data: dp, backgroundColor: '#ec4899' }] }, options: { scales: { x: { min: 1, max: 8, title: {display: true, text: 'Mood (1-8)'} }, y: { min: 0, max: 100, title: {display: true, text: '% Éxito'} } } } });
+            const list = document.getElementById('habits-detail-list'); list.innerHTML = '';
+            state.habits.forEach(h => { const count = (data.history[h.id] || []).length; list.innerHTML += `<div class="p-3 bg-white rounded-xl border flex justify-between"><strong>${h.name}</strong><span>${count} ⭐</span></div>`; });
+            document.getElementById('neuro-insights-content').innerHTML = `<h3 class="font-bold text-pink-700 mb-2">Neuro-Insights</h3><p>• Adherencia: <strong>${adh}%</strong>. ${adh > 70 ? 'Consolidación alta.' : 'Fase de inicio.'}</p><p>• Tu estado emocional promedio es <strong>${document.getElementById('stat-avg-mood-label').innerText}</strong>.</p>`;
         }
 
-        window.onload = init;
+        // --- AJUSTES ---
+        function toggleSettings() { const m = document.getElementById('settings-modal'); m.classList.toggle('hidden'); if (!m.classList.contains('hidden')) { document.getElementById('input-name').value = state.profile.name; document.getElementById('input-age').value = state.profile.age; document.getElementById('input-weight').value = state.profile.weight; renderSuggestions(); renderHabitInputs(); } }
+        function renderSuggestions() { const c = document.getElementById('suggestions-container'); c.innerHTML = ''; SUGGESTED_HABITS.forEach(h => { const chip = document.createElement('div'); chip.className = "suggestion-chip"; chip.innerText = `+ ${h.name}`; chip.onclick = () => { if (state.habits.length < 10) { state.habits.push({ id: Date.now().toString(), name: h.name, desc: h.desc }); renderHabitInputs(); } }; c.appendChild(chip); }); }
+        function renderHabitInputs() { const c = document.getElementById('habits-list-config'); c.innerHTML = ''; state.habits.forEach((h, i) => { c.innerHTML += `<div class="flex gap-2 p-2 bg-slate-50 rounded-xl border mb-2"><input type="text" value="${h.name}" class="flex-1 p-2 border rounded-lg habit-name-input"><input type="text" value="${h.desc}" class="flex-[2] p-2 border rounded-lg habit-desc-input"><button onclick="state.habits.splice(${i}, 1); renderHabitInputs();" class="text-red-400 px-2 text-xl">✕</button></div>`; }); }
+        function addHabitInput() { if (state.habits.length < 10) { state.habits.push({ id: Date.now().toString(), name: '', desc: '' }); renderHabitInputs(); } }
+        function saveSettings() { state.profile.name = document.getElementById('input-name').value; state.profile.age = parseInt(document.getElementById('input-age').value); state.profile.weight = parseInt(document.getElementById('input-weight').value); const ns = document.querySelectorAll('.habit-name-input'), ds = document.querySelectorAll('.habit-desc-input'); state.habits = Array.from(ns).map((n, i) => ({ id: state.habits[i]?.id || Date.now().toString()+i, name: n.value, desc: ds[i].value })).filter(h => h.name.trim()); saveState(); toggleSettings(); renderAll(); }
+        
+        // --- RUTINAS ---
+        function openRoutinePicker() { const m = document.getElementById('routine-modal'); const o = document.getElementById('routine-options'); o.innerHTML = ''; state.routines.forEach(r => { const div = document.createElement('div'); div.className = "routine-card"; div.onclick = () => { getCurrentMonthData().gymLogs[currentGymDay] = r.id; m.classList.add('hidden'); completeCheck(state.habits.find(h=>h.name.toLowerCase().includes('gimnasio')).id, currentGymDay); }; div.innerHTML = `<strong>${r.id}</strong><br><small>${r.name}</small>`; o.appendChild(div); }); m.classList.remove('hidden'); }
+        function cancelRoutine() { document.getElementById('routine-modal').classList.add('hidden'); }
+        function toggleRoutineSettings() { const m = document.getElementById('routine-settings-modal'); const l = document.getElementById('routine-edit-list'); l.innerHTML = ''; state.routines.forEach(r => { l.innerHTML += `<div class="p-3 bg-slate-50 border rounded-xl mb-2"><strong>${r.id}</strong><input type="text" value="${r.name}" class="routine-name-edit block w-full border rounded p-1 my-1"><textarea class="routine-desc-edit block w-full border rounded p-1">${r.desc}</textarea></div>`; }); m.classList.toggle('hidden'); }
+        function saveRoutineSettings() { const ns = document.querySelectorAll('.routine-name-edit'), ds = document.querySelectorAll('.routine-desc-edit'); state.routines.forEach((r, i) => { r.name = ns[i].value; r.desc = ds[i].value; }); saveState(); document.getElementById('routine-settings-modal').classList.add('hidden'); renderAll(); }
+
+        // --- BACKUP ---
+        function downloadBackup() { const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state)); const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", `neurohabit_data_${new Date().toISOString().split('T')[0]}.json`); document.body.appendChild(a); a.click(); a.remove(); }
+        function importBackup() { document.getElementById('import-input').click(); }
+        function handleFileImport(e) { const f = e.target.files[0]; if(!f) return; const r = new FileReader(); r.onload = (ev) => { try { const i = JSON.parse(ev.target.result); if(i.profile) { state = i; saveState(); renderAll(); } } catch(err) { alert("Error al cargar."); }}; r.readAsText(f); }
+
+        function saveState() { localStorage.setItem('neuroHabitData_final_v20', JSON.stringify(state)); }
+        
+        window.onload = () => {
+            const saved = localStorage.getItem('neuroHabitData_final_v20');
+            if (saved) state = Object.assign(state, JSON.parse(saved));
+            renderAll();
+        };
     </script>
 </body>
 </html>
